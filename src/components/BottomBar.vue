@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-light">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-light ">
      <div class="navbar-content" style="display: flex;
     flex-direction: row; margin: 20px 50px; ">
       <p>© 2024 AirStay, Inc.</p>
