@@ -6,6 +6,8 @@
         style="height: 155px"
         :src="info.img"
         alt=""
+        @click="onClickRoom(info.id)"
+        @keydown="handleKeyDown"
       />
       <i
         class="bi bi-circle-fill"
@@ -28,7 +30,7 @@
         @keydown="handleKeyDown"
       ></i>
     </div>
-    <div class="card-body text-left">
+    <div class="card-body text-left" @click="onClickRoom" @keydown="handleKeyDown">
       <h5 class="card-text">
         {{ info.name }}
       </h5>
@@ -52,13 +54,16 @@ export default {
   },
   methods: {
     addToLike() {
-      console.log('click');
+      console.log('addToLike');
     },
     handleKeyDown(event) {
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault(); // 防止空格键触发页面滚动
-        this.addToLike();
+        // this.addToLike();
       }
+    },
+    onClickRoom(id) {
+      this.$router.push(`/room/${id}`);
     },
   },
 };

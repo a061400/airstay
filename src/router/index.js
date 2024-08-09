@@ -15,6 +15,10 @@ const routes = [
         path: 'main',
         component: () => import('../views/AllRoomView.vue'),
       },
+      {
+        path: 'room/:roomId',
+        component: () => import('../views/RoomDetail.vue'),
+      },
     ],
   },
   {
