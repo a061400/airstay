@@ -1,4 +1,5 @@
 <template>
+<Loading :active="isLoading"></Loading>
   <div class="container">
     <div class="row justify-content-center">
       <article class="col-8">
@@ -42,6 +43,7 @@
 export default {
   data() {
     return {
+      isLoading: false,
       roomInfo: {},
       id: '',
     };
@@ -64,16 +66,17 @@ export default {
       //   price: '2300',
       // };
       // this.roomInfo = baseInfo;
+      this.isLoading = true;
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${id}`;
-      this.$http.get(api)
-        .then((res) => {
-          if (res.data.success) {
-            console.log('取得獨立房間資料成功', res);
-            this.roomInfo = res.data.product;
-          } else {
-            console.log('取得獨立房間資料失敗');
-          }
-        });
+      this.$http.get(api).then((res) => {
+        if (res.data.success) {
+          console.log('取得獨立房間資料成功', res);
+          this.roomInfo = res.data.product;
+        } else {
+          console.log('取得獨立房間資料失敗');
+        }
+        this.isLoading = false;
+      });
     },
     addToLike() {
 

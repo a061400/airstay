@@ -1,5 +1,6 @@
 <template>
-    <div class="container-fluid" style="display: flex;
+  <Loading :active="isLoading"></Loading>
+  <div class="container-fluid" style="display: flex;
   justify-content: center; margin: 50px;">
     <form class="d-flex" style="width:800px" @submit.prevent="onClickSearch">
       <input class="form-control me-2" type="search" placeholder="搜尋目的地" aria-label="Search">
@@ -24,6 +25,7 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       infoList: [],
       pagination: {},
     };
@@ -54,9 +56,9 @@ export default {
     },
     getRoomData(page = 1) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products?page=${page}`;
+      this.isLoading = true;
       this.$http.get(api)
         .then((res) => {
-          this.isLoading = false;
           console.log(res);
           if (res.data.success) {
             console.log('取得房間資料成功');
@@ -65,6 +67,7 @@ export default {
           } else {
             console.log('取得房間資料失敗');
           }
+          this.isLoading = false;
         });
     },
   },
