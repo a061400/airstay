@@ -4,13 +4,11 @@
   <div style="width: 100vw;
       height: 100vh;
       background-color: #d3d3d3;
-      border: 1px solid #ccc;
       position: relative;
       ">
-  </div>
   <div class="container mt-5" style="position: absolute;
       top: 10%;
-      left: 5%;">
+      left: 10%;">
     <form class="row justify-content-center"
     @submit.prevent="clickLogin">
       <div class="col-md-6">
@@ -63,6 +61,7 @@
       </div>
     </form>
   </div>
+</div>
 
 </template>
 

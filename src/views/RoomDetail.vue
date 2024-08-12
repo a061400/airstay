@@ -21,19 +21,40 @@
           現在只要 {{ roomInfo.price }} 元
         </div>
         <hr />
+        <div style="margin:10px">
         <button
           type="button"
-          class="btn btn-outline-danger"
-          @click="addToLike(roomInfo.id)"
+          class="btn btn-primary"
+          @click="bookNow(roomInfo.id)"
+          :disabled="this.status.loadingItem === roomInfo.id"
         >
           <div
+            v-if="this.status.loadingItem === roomInfo.id"
             class="spinner-border spinner-border-sm text-warning"
             role="status"
           >
             <span class="visually-hidden">Loading...</span>
           </div>
-          加到我的最愛
+          立即預定
         </button>
+        </div>
+        <div style="margin:10px">
+        <button
+          type="button"
+          class="btn btn-outline-warning"
+          @click="addToCart(roomInfo.id)"
+          :disabled="this.status.loadingItem === roomInfo.id"
+        >
+          <div
+            v-if="this.status.loadingItem === roomInfo.id"
+            class="spinner-border spinner-border-sm text-warning"
+            role="status"
+          >
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          加入購物車
+        </button>
+        </div>
       </div>
     </div>
   </div>
@@ -46,6 +67,9 @@ export default {
       isLoading: false,
       roomInfo: {},
       id: '',
+      status: {
+        loadingItem: '',
+      },
     };
   },
   created() {
@@ -79,6 +103,25 @@ export default {
       });
     },
     addToLike() {
+
+    },
+    addToCart(roomId) {
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
+      const cart = {
+        product_id: roomId,
+        qty: 1,
+      };
+      this.status.loadingItem = roomId;
+      this.$http.post(api, { data: cart }).then((res) => {
+        if (res.data.success) {
+          console.log('用戶端 在獨立房間頁面 加入購物車成功', res.data.data);
+        } else {
+          console.log('用戶端 在獨立房間頁面 加入購物車失敗');
+        }
+        this.status.loadingItem = '';
+      });
+    },
+    bookNow() {
 
     },
   },
