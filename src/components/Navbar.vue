@@ -54,8 +54,10 @@ export default {
             this.emitter.emit('login-status', {
               isLogin: false,
             });
+            this.emitter.emit('push-message', { style: 'success', title: '會員登出成功', content: '' });
             console.log('登出成功', res);
           } else {
+            this.emitter.emit('push-message', { style: 'danger', title: '會員登出失敗', content: '已登出或重新再試一次' });
             console.log('已經登出或登出失敗');
           }
         });

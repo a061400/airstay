@@ -94,9 +94,11 @@ export default {
             this.emitter.emit('login-status', {
               isLogin: true,
             });
+            this.emitter.emit('push-message', { style: 'success', title: '會員登入成功', content: '' });
             this.$router.push('/main');
           } else {
             this.isInputError = true;
+            this.emitter.emit('push-message', { style: 'danger', title: '登入失敗', content: '帳號或密碼有錯誤' });
             console.log('登入失敗，帳號或密碼有錯誤');
           }
         });

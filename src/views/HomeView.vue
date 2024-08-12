@@ -1,6 +1,11 @@
 <template>
 <NavBar :isLogin="isLogin"></NavBar>
-<router-view />
+<div class="container-fluid">
+    <div class="container-fluid mt-3 position-relative">
+    <ToastMessage></ToastMessage>
+    </div>
+</div>
+ <router-view />
 <BottomBar></BottomBar>
 </template>
 
@@ -8,12 +13,14 @@
 import NavBar from '@/components/NavBar.vue';
 import BottomBar from '@/components/BottomBar.vue';
 import emitter from '@/methods/emitter';
+import ToastMessage from '@/components/ToastMessage.vue';
 
 export default {
   name: 'HomeView',
   components: {
     NavBar,
     BottomBar,
+    ToastMessage,
   },
 
   data() {
