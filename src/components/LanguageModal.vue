@@ -21,7 +21,7 @@
             <div class="mb-2 col-md-12">
               <button v-for="(country,index) in countryArr" :key="country"
                  type="button" class="btn btn-outline-secondary"
-                 data-bs-dismiss="modal" style="margin:5px">
+                 data-bs-dismiss="modal" style="margin:5px" @click="onclickLang(index)">
                  <img alt="Vue logo" :src="require(`@/assets/${country}.png`)" style="width:25px">
                     {{langArr[index]}}
               </button>
@@ -66,6 +66,9 @@ export default {
     modalMixin,
   ],
   methods: {
+    onclickLang(curIndex) {
+      this.$emit('onclick-lang', this.countryArr[curIndex]);
+    },
   },
 };
 </script>

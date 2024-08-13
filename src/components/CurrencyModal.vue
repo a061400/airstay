@@ -21,7 +21,7 @@
             <div class="mb-2 col-md-12">
               <button v-for="(country,index) in countryArr" :key="country"
                  type="button" class="btn btn-outline-secondary"
-                 data-bs-dismiss="modal" style="margin:5px">
+                 data-bs-dismiss="modal" style="margin:5px" @click="onclickCurrency(index)">
                  <img alt="Vue logo" :src="require(`@/assets/${country}.png`)" style="width:25px">
                     {{currencyArr[index]}}
               </button>
@@ -47,7 +47,7 @@ export default {
         'TW', 'EN', 'FR', 'JP', 'KR', 'TH', 'VN',
       ],
       currencyArr: [
-        'TWD', 'USD', 'EUR', 'JPY', 'KRW', 'THB', 'VND',
+        'TWD', 'GBP', 'EUR', 'JPY', 'KRW', 'THB', 'VND',
       ],
     };
   },
@@ -66,6 +66,9 @@ export default {
     modalMixin,
   ],
   methods: {
+    onclickCurrency(curIndex) {
+      this.$emit('onclick-currency', this.currencyArr[curIndex]);
+    },
   },
 };
 </script>

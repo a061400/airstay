@@ -1,5 +1,6 @@
 <template>
-<NavBar :isLogin="isLogin" @onclick-langModal="showLanguageModal"
+<NavBar :isLogin="isLogin" :curCurrency="curCurrency"
+:curLang="curLang" @onclick-langModal="showLanguageModal"
  @onclick-currencyModal="showCurrencyModal"></NavBar>
 <div class="container-fluid">
     <div class="container-fluid mt-3 position-relative">
@@ -7,8 +8,12 @@
     </div>
 </div>
  <router-view />
-<LanguageModal ref="languageModal"></LanguageModal>
-<CurrencyModal ref="currencyModal"></CurrencyModal>
+<LanguageModal ref="languageModal"
+@onclick-lang="changeLang">
+</LanguageModal>
+<CurrencyModal ref="currencyModal"
+@onclick-currency="changeCurrency">
+</CurrencyModal>
 <BottomBar></BottomBar>
 </template>
 
@@ -35,6 +40,8 @@ export default {
       isLogin: false,
       languageComponents: {},
       currencyComponents: {},
+      curCurrency: 'TWD',
+      curLang: 'TW',
     };
   },
   created() {
@@ -65,6 +72,12 @@ export default {
     },
     showCurrencyModal() {
       this.currencyComponents.showModal();
+    },
+    changeCurrency(curCurrencyData) {
+      this.curCurrency = curCurrencyData;
+    },
+    changeLang(curLangData) {
+      this.curLang = curLangData;
     },
   },
   watch: {
