@@ -2,13 +2,24 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <img alt="Vue logo" src="../assets/logo.png" style="width:25px">
         <router-link to="/main" class="navbar-brand">AirStay</router-link>
         <div class="navbar-nav">
           <router-link to="/" class="nav-link">刊登空房</router-link>
-          <router-link to="/" class="nav-link">變更地區語言</router-link>
-          <router-link to="/" class="nav-link">變更幣別</router-link>
+          <router-link to="/main" class="nav-link" @click="onclickLangBtn">變更語言</router-link>
+          <router-link to="/main" class="nav-link" @click="onclickCurrencyBtn">變更幣別</router-link>
 
           <router-link to="/" class="nav-link">成為新會員</router-link>
 
@@ -95,6 +106,12 @@ export default {
     },
   },
   methods: {
+    onclickLangBtn() {
+      this.$emit('onclick-langModal');
+    },
+    onclickCurrencyBtn() {
+      this.$emit('onclick-currencyModal');
+    },
     hoverIcon(isHover, item) {
       this.isAccount = isHover && (item === 'account');
       this.isLike = isHover && (item === 'like');

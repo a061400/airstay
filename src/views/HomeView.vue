@@ -1,11 +1,14 @@
 <template>
-<NavBar :isLogin="isLogin"></NavBar>
+<NavBar :isLogin="isLogin" @onclick-langModal="showLanguageModal"
+ @onclick-currencyModal="showCurrencyModal"></NavBar>
 <div class="container-fluid">
     <div class="container-fluid mt-3 position-relative">
     <ToastMessage></ToastMessage>
     </div>
 </div>
  <router-view />
+<LanguageModal ref="languageModal"></LanguageModal>
+<CurrencyModal ref="currencyModal"></CurrencyModal>
 <BottomBar></BottomBar>
 </template>
 
@@ -14,6 +17,8 @@ import NavBar from '@/components/NavBar.vue';
 import BottomBar from '@/components/BottomBar.vue';
 import emitter from '@/methods/emitter';
 import ToastMessage from '@/components/ToastMessage.vue';
+import LanguageModal from '@/components/LanguageModal.vue';
+import CurrencyModal from '@/components/CurrencyModal.vue';
 
 export default {
   name: 'HomeView',
@@ -21,11 +26,15 @@ export default {
     NavBar,
     BottomBar,
     ToastMessage,
+    LanguageModal,
+    CurrencyModal,
   },
 
   data() {
     return {
       isLogin: false,
+      languageComponents: {},
+      currencyComponents: {},
     };
   },
   created() {
@@ -44,10 +53,19 @@ export default {
     });
   },
   mounted() {
+    this.languageComponents = this.$refs.languageModal;
+    this.currencyComponents = this.$refs.currencyModal;
     emitter.on('login-status', (data) => {
       this.isLogin = data.isLogin;
-      console.log('homeview', this.isLogin);
     });
+  },
+  methods: {
+    showLanguageModal() {
+      this.languageComponents.showModal();
+    },
+    showCurrencyModal() {
+      this.currencyComponents.showModal();
+    },
   },
   watch: {
   },
