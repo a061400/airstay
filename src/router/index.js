@@ -19,6 +19,10 @@ const routes = [
         path: 'room/:roomId',
         component: () => import('../views/RoomDetail.vue'),
       },
+      {
+        path: 'wishList',
+        component: () => import('../views/WishList.vue'),
+      },
     ],
   },
   {

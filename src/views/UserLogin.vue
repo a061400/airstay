@@ -91,7 +91,7 @@ export default {
 
             this.isInputError = false;
             console.log('登入成功', res);
-            this.emitter.emit('login-status', {
+            this.emitter.emit('home-login-status', {
               isLogin: true,
             });
             this.emitter.emit('push-message', { style: 'success', title: '會員登入成功', content: '' });

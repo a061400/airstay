@@ -1,7 +1,8 @@
 <template>
 <NavBar :isLogin="isLogin" :curCurrency="curCurrency"
 :curLang="curLang" @onclick-langModal="showLanguageModal"
- @onclick-currencyModal="showCurrencyModal"></NavBar>
+ @onclick-currencyModal="showCurrencyModal"
+ :wishListNum="wishListNum"></NavBar>
 <div class="container-fluid">
     <div class="container-fluid mt-3 position-relative">
     <ToastMessage></ToastMessage>
@@ -42,6 +43,7 @@ export default {
       currencyComponents: {},
       curCurrency: 'TWD',
       curLang: 'TW',
+      wishListNum: '',
     };
   },
   created() {
@@ -58,12 +60,16 @@ export default {
         this.isLogin = false;
       }
     });
+    this.getWishListNum();
   },
   mounted() {
     this.languageComponents = this.$refs.languageModal;
     this.currencyComponents = this.$refs.currencyModal;
-    emitter.on('login-status', (data) => {
+    emitter.on('home-login-status', (data) => {
       this.isLogin = data.isLogin;
+    });
+    emitter.on('home-update-wishListNum', () => {
+      this.getWishListNum();
     });
   },
   methods: {
@@ -78,6 +84,18 @@ export default {
     },
     changeLang(curLangData) {
       this.curLang = curLangData;
+    },
+    getWishListNum() {
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
+      this.$http.get(api)
+        .then((res) => {
+          if (res.data.success) {
+            this.wishListNum = res.data.data.carts.length;
+            console.log('取得 心願總數量 成功', this.wishListNum);
+          } else {
+            console.log('取得 心願總數量 失敗');
+          }
+        });
     },
   },
   watch: {

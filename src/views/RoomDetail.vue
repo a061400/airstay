@@ -39,7 +39,7 @@
         </button>
         </div>
         <div style="margin:10px">
-        <button
+        <button v-if="!isWish"
           type="button"
           class="btn btn-outline-warning"
           @click="addToCart(roomInfo.id)"
@@ -52,7 +52,14 @@
           >
             <span class="visually-hidden">Loading...</span>
           </div>
-          加入購物車
+          加入收藏住宿
+        </button>
+         <button v-if="isWish"
+          type="button"
+          class="btn btn-outline-warning"
+          :disabled="true"
+        >
+          已收藏住宿
         </button>
         </div>
       </div>
@@ -61,7 +68,11 @@
 </template>
 
 <script>
+
 export default {
+  inject: [
+    'emitter',
+  ],
   data() {
     return {
       isLoading: false,
@@ -70,6 +81,7 @@ export default {
       status: {
         loadingItem: '',
       },
+      isWish: false,
     };
   },
   created() {
@@ -94,16 +106,13 @@ export default {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${id}`;
       this.$http.get(api).then((res) => {
         if (res.data.success) {
-          console.log('取得獨立房間資料成功', res);
+          console.log('用戶端 取得獨立房間資料成功', res);
           this.roomInfo = res.data.product;
         } else {
-          console.log('取得獨立房間資料失敗');
+          console.log('用戶端 取得獨立房間資料失敗');
         }
         this.isLoading = false;
       });
-    },
-    addToLike() {
-
     },
     addToCart(roomId) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
@@ -114,9 +123,12 @@ export default {
       this.status.loadingItem = roomId;
       this.$http.post(api, { data: cart }).then((res) => {
         if (res.data.success) {
-          console.log('用戶端 在獨立房間頁面 加入購物車成功', res.data.data);
+          console.log('用戶端 獨立房間頁面 加入收藏成功', res.data.data);
+          this.emitter.emit('home-update-wishListNum');
+          this.emitter.emit('AllRoomView-update');
+          this.isWish = true;
         } else {
-          console.log('用戶端 在獨立房間頁面 加入購物車失敗');
+          console.log('用戶端 獨立房間頁面 加入收藏失敗');
         }
         this.status.loadingItem = '';
       });

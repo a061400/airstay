@@ -34,7 +34,8 @@
              @mouseover="hoverIcon(true, 'account')"
              @mouseleave="hoverIcon(false, 'account')"
              @click.prevent="login"
-             @keydown="handleKeyDown"></i>
+             @keydown="handleKeyDown">
+          </i>
 
           <!-- 登出圖示 -->
           <i v-if="isLogin" class="bi bi-person-check"
@@ -42,17 +43,47 @@
              @mouseover="hoverIcon(true, 'account')"
              @mouseleave="hoverIcon(false, 'account')"
              @click.prevent="logout"
-             @keydown="handleKeyDown"></i>
+             @keydown="handleKeyDown">
+          </i>
 
-          <!-- 其他已登入圖示 -->
-          <i v-if="isLogin" class="bi bi-house-heart"
-          :style="likeIconStyle"
+          <!-- 加入收藏圖示 -->
+          <i class="bi bi-house-heart"
+             :style="likeIconStyle"
              @mouseover="hoverIcon(true, 'like')"
-             @mouseleave="hoverIcon(false, 'like')"></i>
-          <i v-if="isLogin" class="bi bi-cart3"
-          :style="cartIconStyle"
+             @mouseleave="hoverIcon(false, 'like')"
+             @click.prevent="onclickWish"
+             @keydown="handleKeyDown">
+          </i>
+          <i
+            class="bi bi-circle-fill"
+            style="
+             position: absolute;
+             top: 6px;
+             right: 75px;
+             font-size: 18px;
+             color: red;
+            "
+          >
+          <span
+          style="
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 12px;
+            font-family: 'Arial', sans-serif;
+          "
+          >{{wishListNum}}</span>
+          </i>
+          <!-- 加入購物車圖示 -->
+          <!-- <i v-if="isLogin" class="bi bi-cart3"
+             :style="cartIconStyle"
              @mouseover="hoverIcon(true, 'cart')"
-             @mouseleave="hoverIcon(false, 'cart')"></i>
+             @mouseleave="hoverIcon(false, 'cart')"
+             @click.prevent="onclickCart"
+             @keydown="handleKeyDown">
+          </i> -->
         </div>
       </div>
     </div>
@@ -71,6 +102,7 @@ export default {
     },
     curCurrency: {},
     curLang: {},
+    wishListNum: {},
   },
   data() {
     return {
@@ -100,16 +132,16 @@ export default {
         transition: 'all 0.3s ease',
       };
     },
-    cartIconStyle() {
-      return {
-        color: this.isCart ? 'gold' : 'white',
-        position: 'absolute',
-        top: this.isCart ? '6px' : '6px',
-        right: this.isLogin ? '132px' : '132px', // 根據 isLogin 判斷右邊距離（可選）
-        fontSize: this.isCart ? '30px' : '30px',
-        transition: 'all 0.3s ease',
-      };
-    },
+    // cartIconStyle() {
+    //   return {
+    //     color: this.isCart ? 'gold' : 'white',
+    //     position: 'absolute',
+    //     top: this.isCart ? '6px' : '6px',
+    //     right: this.isLogin ? '132px' : '132px', // 根據 isLogin 判斷右邊距離（可選）
+    //     fontSize: this.isCart ? '30px' : '30px',
+    //     transition: 'all 0.3s ease',
+    //   };
+    // },
   },
   methods: {
     onclickLangBtn() {
@@ -129,7 +161,7 @@ export default {
         .then((res) => {
           if (res.data.success) {
             this.$router.push('/main');
-            this.emitter.emit('login-status', {
+            this.emitter.emit('home-login-status', {
               isLogin: false,
             });
             this.emitter.emit('push-message', { style: 'success', title: '會員登出成功', content: '' });
@@ -143,10 +175,12 @@ export default {
     login() {
       this.$router.push('/login');
     },
+    onclickWish() {
+      this.$router.push('/wishList');
+    },
     handleKeyDown(event) {
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault(); // 防止空格键触发页面滚动
-        // this.addToLike();
       }
     },
   },
