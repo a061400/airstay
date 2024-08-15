@@ -82,11 +82,13 @@ export default {
         loadingItem: '',
       },
       isWish: false,
+      wishList: [],
     };
   },
   created() {
     this.id = this.$route.params.roomId;
     this.getRoomData(this.id);
+    this.getWishList();
   },
   methods: {
     getRoomData(id) {
@@ -135,6 +137,28 @@ export default {
     },
     bookNow() {
 
+    },
+    getWishList() {
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
+      this.isLoading = true;
+      this.$http.get(api)
+        .then((res) => {
+          if (res.data.success) {
+            console.log('獨立頁面 取得心願列表資料成功', res);
+            this.wishList = res.data.data.carts;
+            this.filterWishList();
+          } else {
+            console.log('獨立頁面 取得心願列表資料失敗');
+          }
+          this.isLoading = false;
+        });
+    },
+    filterWishList() {
+      this.wishList.forEach((res) => {
+        if (this.id === res.product.id) {
+          this.isWish = true;
+        }
+      });
     },
   },
 };

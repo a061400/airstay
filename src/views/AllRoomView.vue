@@ -57,10 +57,9 @@ export default {
     //     id: `room${i}`,
     //   });
     // }
-
+    this.emitter.emit('home-update-wishListNum');
     this.getRoomData();
     this.getWishList();
-    this.emitter.emit('home-update-wishListNum');
   },
   methods: {
     onClickSearch() {
@@ -77,7 +76,9 @@ export default {
           } else {
             console.log('取得房間資料失敗');
           }
-          this.isLoading = false;
+
+          // 等待getWishList取得資料完成在讓loading消失
+          // this.isLoading = false;
         });
     },
     getWishList() {
