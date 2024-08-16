@@ -1,5 +1,7 @@
 <template>
-<Loading :active="isLoading"></Loading>
+<Loading :active="isLoading">
+  <img src="@/assets/loadingAni.gif" alt="Loading..." style="width:100px"/>
+</Loading>
   <div class="container">
     <div class="row justify-content-center">
       <article class="col-8">

@@ -1,5 +1,7 @@
 <template>
-  <Loading :active="isLoading"></Loading>
+  <Loading :active="isLoading">
+    <img src="@/assets/loadingAni.gif" alt="Loading..." style="width:100px"/>
+  </Loading>
   <div class="container-fluid" style="display: flex;
   justify-content: center; margin: 50px;">
     <form class="d-flex" style="width:800px" @submit.prevent="onClickSearch">

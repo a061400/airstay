@@ -1,5 +1,8 @@
+<!-- eslint-disable vuejs-accessibility/iframe-has-title -->
 <template>
-  <Loading :active="isLoading"></Loading>
+  <Loading :active="isLoading">
+    <img src="@/assets/loadingAni.gif" alt="Loading..." style="width:100px"/>
+  </Loading>
   <div class="container-fluid"
        style="display: flex; justify-content: center;
        align-items: center; margin: 50px;
