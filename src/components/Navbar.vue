@@ -28,22 +28,47 @@
           <router-link to="/" class="nav-link">成為新會員</router-link>
 
           <!-- 登入圖示 -->
-          <i v-if="!isLogin"
+          <i v-if="!isLogin" data-bs-toggle="dropdown" aria-expanded="false"
              class="bi bi-person"
              :style="accountIconStyle"
              @mouseover="hoverIcon(true, 'account')"
              @mouseleave="hoverIcon(false, 'account')"
-             @click.prevent="login"
-             @keydown="handleKeyDown">
+             >
+             <div style="
+             position: absolute;
+             top: 50px;
+             right: 130px;">
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">帳戶資訊</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#"
+                    @click.prevent="login"
+                    @keydown="handleKeyDown">登入
+                  </a></li>
+                </ul>
+             </div>
           </i>
 
           <!-- 登出圖示 -->
-          <i v-if="isLogin" class="bi bi-person-check"
+          <i v-if="isLogin" data-bs-toggle="dropdown" aria-expanded="false"
+          class="bi bi-person-check"
              :style="accountIconStyle"
              @mouseover="hoverIcon(true, 'account')"
              @mouseleave="hoverIcon(false, 'account')"
-             @click.prevent="logout"
-             @keydown="handleKeyDown">
+          >
+            <div style="
+             position: absolute;
+             top: 50px;
+             right: 130px;">
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">帳戶資訊</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#"
+                    @click.prevent="logout"
+                    @keydown="handleKeyDown">登出
+                  </a></li>
+                </ul>
+             </div>
           </i>
 
           <!-- 加入收藏圖示 -->
