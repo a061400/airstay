@@ -138,7 +138,8 @@ export default {
       });
     },
     bookNow() {
-
+      this.addToCart(this.roomInfo.id);
+      this.$router.push(`/checkout/${this.id}`);
     },
     getWishList() {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;

@@ -42,23 +42,6 @@ export default {
     });
   },
   created() {
-    // const baseInfo = {
-    //   id: '',
-    //   img: 'https://images.unsplash.com/photo-1617093727343-374698b1b08d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-    //   name: '永豐棧酒店',
-    //   city: '台中市',
-    //   country: '台灣',
-    //   rating: '8.1',
-    //   ratingNum: '3365',
-    // };
-
-    // for (let i = 1; i <= 20; i++) {
-    //   this.infoList.push({
-    //     ...baseInfo,
-    //     name: `永豐棧酒店 ${i}`,
-    //     id: `room${i}`,
-    //   });
-    // }
     this.emitter.emit('home-update-wishListNum');
     this.getRoomData();
     this.getWishList();

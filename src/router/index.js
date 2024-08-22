@@ -23,6 +23,14 @@ const routes = [
         path: 'wishList',
         component: () => import('../views/WishList.vue'),
       },
+      {
+        path: 'checkout/:roomId',
+        component: () => import('../views/CheckoutView.vue'),
+      },
+      {
+        path: 'ordered/:orderedId',
+        component: () => import('../views/OrderedView.vue'),
+      },
     ],
   },
   {
