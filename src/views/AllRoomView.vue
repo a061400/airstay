@@ -5,7 +5,9 @@
   <div class="container-fluid" style="display: flex;
   justify-content: center; margin: 50px;">
     <form class="d-flex" style="width:800px" @submit.prevent="onClickSearch">
-      <input class="form-control me-2" type="search" placeholder="搜尋目的地" aria-label="Search">
+      <input class="form-control me-2" type="search" placeholder="目的地" aria-label="Search">
+      <input class="form-control me-2" type="date" placeholder="入住日期" aria-label="Search">
+      <input class="form-control me-2" type="date" placeholder="退房日期" aria-label="Search">
       <button class="btn btn-outline-success" type="submit"
        style="width: 100px; height: 60px;">搜尋</button>
     </form>
