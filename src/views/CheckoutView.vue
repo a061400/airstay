@@ -137,7 +137,7 @@
             </tr>
              <tr>
               <th>總金額：</th>
-              <td>{{ orderInfo.total }}</td>
+              <td>{{ $numFilter.currency(cart.total) }}</td>
             </tr>
             <tr>
               <th>付款狀態：</th>
@@ -217,13 +217,13 @@
       <div class="col-md-5">
         <div class="sticky-top">
           <article class="col-8">
-            <h2>{{ cart.title }}</h2>
-            <img :src="cart.imageUrl" alt="" class="img-fluid mb-3" />
-            <div>{{ cart.category }}</div>
-            <div>{{ cart.content }}</div>
+            <h2>{{ cart.product.title }}</h2>
+            <img :src="cart.product.imageUrl" alt="" class="img-fluid mb-3" />
+            <div>{{ cart.product.category }}</div>
+            <div>{{ cart.product.content }}</div>
             <div>
-              <i class="bi bi-star-fill"></i> {{ cart.unit }} ·
-              {{ cart.description }}則評價
+              <i class="bi bi-star-fill"></i> {{ cart.product.unit }} ·
+              {{ cart.product.description }}則評價
             </div>
           </article>
 
@@ -238,10 +238,10 @@
             </thead>
             <tbody>
               <tr>
-                <td>2024年9月16日</td>
-                <td>2024年9月17日</td>
+                <td>2024年12月21日</td>
+                <td>2024年12月22日</td>
                 <td>1 晚</td>
-                <td>1 間</td>
+                <td>{{cart.qty}} 間</td>
               </tr>
             </tbody>
             <tfoot></tfoot>
@@ -271,26 +271,22 @@
                 >
                   套用優惠碼
                 </button>
-                <button
-                  class="btn btn-outline-secondary"
-                  type="button"
-                  @click="cancelCouponCode"
-                  :disabled="this.status.loadingItem === 'on'"
-                >
-                  取消優惠碼
-                </button>
               </div>
             </div>
           </Form>
 
           <table class="table align-middle">
             <div class="text-success" v-if="cart.coupon">已套用優惠券</div>
-            <div class="">原價：{{ $numFilter.currency(cart.price) }}</div>
-            <div v-if="cart.origin_price !== cart.price" class="text-success">
-              AirStay周年慶折扣： -{{ $numFilter.currency(cart.price * 0.1) }}
+            <div class="" style="font-weight: bold; font-size: 18px">
+              總金額：{{ $numFilter.currency(cart.total) }}
             </div>
-            <div class="">
-              總價：{{ $numFilter.currency(cart.price * 0.9) }}
+            <div v-if="cart.final_total !== cart.total" class="text-success"
+            style="font-weight: bold; font-size: 18px">
+              周年慶折扣： -{{ $numFilter.currency(cart.final_total) }}
+            </div>
+            <div v-if="cart.final_total !== cart.total"
+            style="font-weight: bold; font-size: 18px">
+              折扣後總金額：{{ $numFilter.currency(cart.total - cart.final_total) }}
             </div>
           </table>
         </div>
@@ -305,7 +301,9 @@ export default {
   data() {
     return {
       isLoading: false,
-      cart: {},
+      cart: {
+        product: {},
+      },
       status: {
         loadingItem: '',
       },
@@ -351,12 +349,25 @@ export default {
       item.target.style.transform = 'scale(1)';
     },
     getRoomdata() {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${this.id}`;
+      // const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${this.id}`;
+      // this.isLoading = true;
+      // this.$http.get(api).then((res) => {
+      //   if (res.data.success) {
+      //     console.log('訂房頁面 取得資料成功', res);
+      //     this.cart = res.data.product;
+      //   } else {
+      //     console.log('訂房頁面 取得資料失敗');
+      //   }
+      //   this.isLoading = false;
+      // });
+
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
       this.isLoading = true;
       this.$http.get(api).then((res) => {
         if (res.data.success) {
           console.log('訂房頁面 取得資料成功', res);
-          this.cart = res.data.product;
+          // eslint-disable-next-line prefer-destructuring
+          this.cart = res.data.data.carts[0];
         } else {
           console.log('訂房頁面 取得資料失敗');
         }
