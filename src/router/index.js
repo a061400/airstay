@@ -34,9 +34,27 @@ const routes = [
     ],
   },
   {
-    path: '/about',
-    name: 'about',
-    component: () => import('../views/AboutView.vue'),
+    path: '/dashboard',
+    name: 'dashboard',
+    component: () => import('../views/Dashboard.vue'),
+    children: [
+      {
+        path: 'login',
+        component: () => import('../views/BackLogin.vue'),
+      },
+      {
+        path: 'room',
+        component: () => import('../views/BackRoomInfo.vue'),
+      },
+      {
+        path: 'coupon',
+        component: () => import('../views/BackCouponInfo.vue'),
+      },
+      {
+        path: 'order',
+        component: () => import('../views/BackOrderInfo.vue'),
+      },
+    ],
   },
 ];
 

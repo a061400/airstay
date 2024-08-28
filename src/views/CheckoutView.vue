@@ -1,9 +1,9 @@
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <!-- eslint-disable vuejs-accessibility/form-control-has-label -->
 <template>
-<Loading :active="isLoading">
-  <img src="@/assets/loadingAni.gif" alt="Loading..." style="width:100px"/>
-</Loading>
+  <Loading :active="isLoading">
+    <img src="@/assets/loadingAni.gif" alt="Loading..." style="width: 100px" />
+  </Loading>
   <div class="container">
     <div style="display: flex; align-items: center">
       <i
@@ -135,9 +135,9 @@
               <th>特殊需求：</th>
               <td>{{ orderInfo.message }}</td>
             </tr>
-             <tr>
+            <tr>
               <th>總金額：</th>
-              <td>{{ $numFilter.currency(cart.total) }}</td>
+              <td>{{ $numFilter.currency(cart.total - cart.final_total) }}</td>
             </tr>
             <tr>
               <th>付款狀態：</th>
@@ -189,7 +189,11 @@
             checked
           />
           <label class="btn btn-outline-secondary" for="success-outlined">
-            <img src="@/assets/mastercard.png" alt="VISA" style="width:100px"/>
+            <img
+              src="@/assets/mastercard.png"
+              alt="VISA"
+              style="width: 100px"
+            />
           </label>
         </div>
 
@@ -202,14 +206,11 @@
             autocomplete="off"
           />
           <label class="btn btn-outline-secondary" for="danger-outlined">
-            <img src="@/assets/visa.png" alt="VISA" style="width:100px"/>
-          </label
-          >
+            <img src="@/assets/visa.png" alt="VISA" style="width: 100px" />
+          </label>
         </div>
         <div class="text-end">
-          <button class="btn btn-danger">
-            完成訂房 : 確認付款
-          </button>
+          <button class="btn btn-danger">完成訂房 : 確認付款</button>
         </div>
       </form>
 
@@ -241,7 +242,7 @@
                 <td>2024年12月21日</td>
                 <td>2024年12月22日</td>
                 <td>1 晚</td>
-                <td>{{cart.qty}} 間</td>
+                <td>{{ cart.qty }} 間</td>
               </tr>
             </tbody>
             <tfoot></tfoot>
@@ -269,6 +270,13 @@
                   class="btn btn-outline-secondary"
                   :disabled="this.status.loadingItem === 'on'"
                 >
+                <div
+                  v-if="this.status.loadingItem === 'on'"
+                  class="spinner-border spinner-border-sm text-warning"
+                  role="status"
+                >
+                  <span class="visually-hidden">Loading...</span>
+                </div>
                   套用優惠碼
                 </button>
               </div>
@@ -280,13 +288,20 @@
             <div class="" style="font-weight: bold; font-size: 18px">
               總金額：{{ $numFilter.currency(cart.total) }}
             </div>
-            <div v-if="cart.final_total !== cart.total" class="text-success"
-            style="font-weight: bold; font-size: 18px">
-              周年慶折扣： -{{ $numFilter.currency(cart.final_total) }}
+            <div
+              v-if="cart.final_total !== cart.total"
+              class="text-success"
+              style="font-weight: bold; font-size: 18px"
+            >
+              優惠券折扣： -{{ $numFilter.currency(cart.final_total) }}
             </div>
-            <div v-if="cart.final_total !== cart.total"
-            style="font-weight: bold; font-size: 18px">
-              折扣後總金額：{{ $numFilter.currency(cart.total - cart.final_total) }}
+            <div
+              v-if="cart.final_total !== cart.total"
+              style="font-weight: bold; font-size: 18px"
+            >
+              折扣後總金額：{{
+                $numFilter.currency(cart.total - cart.final_total)
+              }}
             </div>
           </table>
         </div>
@@ -323,7 +338,7 @@ export default {
       },
 
       createOrderInfo: {},
-
+      coupon_code: '',
       isPayView: false,
     };
   },
@@ -415,6 +430,23 @@ export default {
           console.log('用戶端 付款失敗');
         }
         this.isLoading = false;
+      });
+    },
+
+    addCouponCode() {
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/coupon`;
+      this.status.loadingItem = 'on';
+      const couponCode = {
+        code: this.coupon_code,
+      };
+      this.$http.post(api, { data: couponCode }).then((res) => {
+        if (res.data.success) {
+          this.getRoomdata();
+          console.log('用戶端 套用優惠券成功', res.data);
+        } else {
+          console.log('用戶端 套用優惠券失敗');
+        }
+        this.status.loadingItem = '';
       });
     },
   },
