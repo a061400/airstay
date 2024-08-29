@@ -75,19 +75,9 @@ export default {
       this.$http.post(api)
         .then((res) => {
           if (res.data.success) {
-            emitter.emit('push-message', {
-              style: 'success',
-              title: '後台登出成功',
-              content: '',
-            });
             this.$router.push('/dashboard/login');
-          } else {
-            emitter.emit('push-message', {
-              style: 'danger',
-              title: '後台登出失敗',
-              content: '已經登出或重試一次',
-            });
           }
+          this.$httpMessage(res, '後台登出');
         });
     },
   },

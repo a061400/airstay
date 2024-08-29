@@ -17,6 +17,8 @@ import { required, email, min } from '@vee-validate/rules';
 // 匯入多國語系的功能
 import { localize, setLocale } from '@vee-validate/i18n';
 
+import pushMessageState from '@/methods/pushMessageState';
+
 // 匯入繁體中文語系檔案
 import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json';
 import { currency, date } from './methods/numFilter';
@@ -47,6 +49,8 @@ app.config.globalProperties.$numFilter = {
   currency,
   date,
 };
+
+app.config.globalProperties.$httpMessage = pushMessageState;
 app.component('Loading', Loading);
 app.use(VueAxios, axios);
 app.use(router);

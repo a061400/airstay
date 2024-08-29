@@ -129,6 +129,7 @@ export default {
         } else {
           console.log('[後台] 刪除房間列表失敗');
         }
+        this.$httpMessage(res, '刪除房間列表');
         this.isLoading = false;
       });
     },
@@ -136,6 +137,7 @@ export default {
       // 新增
       let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`;
       let method = 'post';
+      let title = '新增房型';
 
       // 因為 this.allRoomInfo 是一個proxy物件，不能直接用forEach。
       Object.keys(this.allRoomInfo).forEach((res) => {
@@ -143,6 +145,7 @@ export default {
         if (res === roomInfo.id) {
           api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${roomInfo.id}`;
           method = 'put';
+          title = '編輯房型';
         }
       });
 
@@ -156,6 +159,7 @@ export default {
         } else {
           console.log('[後台] 新增房型失敗', res.data.message);
         }
+        this.$httpMessage(res, title);
         this.isLoading = false;
       });
     },

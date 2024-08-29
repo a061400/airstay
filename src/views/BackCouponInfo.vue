@@ -171,22 +171,13 @@ export default {
       this.$http[httpMethod](api, { data: this.tempCoupons }).then(
         (response) => {
           if (response.data.success) {
-            this.emitter.emit('push-message', {
-              style: 'success',
-              title: '新增或編輯成功',
-              content: '',
-            });
             console.log(title, '成功', response);
             this.couponComponent.hideModal();
             this.getCoupon();
           } else {
-            this.emitter.emit('push-message', {
-              style: 'danger',
-              title: '新增或編輯失敗',
-              content: response.data.message.join(','),
-            });
             console.log(title, '失敗');
           }
+          this.$httpMessage(response, '新增或編輯優惠券');
         },
       );
     },

@@ -84,21 +84,11 @@ export default {
           document.cookie = `hexToken=${token}; expires=${new Date(expired)}`;
 
           this.isInputError = false;
-
-          this.emitter.emit('push-message', {
-            style: 'success',
-            title: '後台登入成功',
-            content: '',
-          });
           this.$router.push('/dashboard');
         } else {
           this.isInputError = true;
-          this.emitter.emit('push-message', {
-            style: 'danger',
-            title: '後台登入失敗',
-            content: '帳號或密碼有錯誤',
-          });
         }
+        this.$httpMessage(res, '後台登入');
       });
     },
   },
