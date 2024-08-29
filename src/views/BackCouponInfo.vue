@@ -50,14 +50,13 @@
         </tr>
       </tbody>
     </table>
-    <CouponModal ref="couponModal"
-    @update-coupon="updateCoupon" :coupon="tempCoupons">
-    </CouponModal>
-    <DelModal ref="delModal"
-    @del-item="delCoupon" :item="tempCoupons">
-    </DelModal>
-
   </div>
+  <CouponModal ref="couponModal"
+    @update-coupon="updateCoupon" :coupon="tempCoupons">
+  </CouponModal>
+  <DelModal ref="delModal"
+    @del-item="delCoupon" :item="tempCoupons">
+  </DelModal>
 </template>
 
 <script>
@@ -114,9 +113,9 @@ export default {
         .then((res) => {
           if (res.data.success) {
             this.coupons = res.data.coupons;
-            console.log('取得優惠券列表成功', res.data);
+            console.log('[後台] 取得優惠券列表成功', res.data);
           } else {
-            console.log('取得優惠券列表失敗');
+            console.log('[後台] 取得優惠券列表失敗');
           }
           this.isLoading = false;
         });
@@ -140,13 +139,17 @@ export default {
 
     delCoupon() {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupon/${this.tempCoupons.id}`;
-      this.$http.delete(api).then(
-        (response) => {
-          console.log(response);
+      this.isLoading = true;
+      this.$http.delete(api).then((res) => {
+        if (res.data.success) {
           this.delComponent.hideModal();
           this.getCoupon();
-        },
-      );
+          console.log('[後台] 刪除優惠券成功', res.data);
+        } else {
+          console.log('[後台] 刪除優惠券失敗');
+        }
+        this.isLoading = false;
+      });
     },
 
     updateCoupon(newData) {

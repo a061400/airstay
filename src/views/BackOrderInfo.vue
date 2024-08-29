@@ -3,7 +3,25 @@
     <img src="@/assets/loadingAni.gif" alt="Loading..." style="width:100px"/>
 </Loading>
 <div v-show="isLogin">
-    backOrderInfo
+    <table class="table mt-4">
+      <thead>
+        <tr>
+          <th>123</th>
+          <th>123</th>
+          <th>123</th>
+          <th>123</th>
+          <th>123</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>123</td>
+          <td>123</td>
+          <td>123</td>
+          <td>123</td>
+        </tr>
+      </tbody>
+    </table>
 </div>
 
 </template>
