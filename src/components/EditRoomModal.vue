@@ -15,28 +15,24 @@
           <h5 class="modal-title" id="exampleModalLabel">
             <span>新增或編輯房型</span>
           </h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
         </div>
         <div class="modal-body">
           <div class="row">
             <div class="col-sm-4">
               <div class="mb-3">
-                <label for="image" class="form-label">輸入圖片網址</label>
+                <label for="image" class="form-label">您想要的圖片網址</label>
                 <input
                   type="text"
                   class="form-control"
                   id="image"
                   placeholder="請輸入圖片連結"
+                  @change="uploadUrl"
+                  v-model="onlineUrl"
                 />
               </div>
               <div class="mb-3">
                 <label for="customFile" class="form-label"
-                  >或 上傳圖片
+                  >或 從您的電腦上傳圖片
                   <i class="fas fa-spinner fa-spin"></i>
                 </label>
                 <input
@@ -49,7 +45,7 @@
               </div>
               <img class="img-fluid" alt="" />
               <!-- 延伸技巧，多圖 -->
-              <div class="mt-5">
+              <!-- <div class="mt-5">
                 <div class="mb-3 input-group">
                   <input
                     type="url"
@@ -65,7 +61,7 @@
                     新增圖片
                   </button>
                 </div>
-              </div>
+              </div> -->
             </div>
             <div class="col-sm-8">
               <div class="mb-3">
@@ -192,6 +188,8 @@ export default {
     return {
       tempRoomInfo: {},
       modal: {},
+      onlineUrl: '',
+      uploadedFile: [],
     };
   },
 
@@ -214,7 +212,31 @@ export default {
   },
 
   methods: {
+    uploadFile() {
+      // 取得圖片資源
+      // eslint-disable-next-line prefer-destructuring
+      this.uploadedFile = this.$refs.fileInput.files[0];
+
+      // 包裝成formData
+      const formData = new FormData();
+      formData.append('file-to-upload', this.uploadedFile);
+
+      // 透過http傳送給遠端資料庫
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`;
+      this.$http.post(api, formData).then((res) => {
+        if (res.data.success) {
+          this.tempRoomInfo.imageUrl = res.data.imageUrl;
+          console.log('上傳圖片成功');
+        } else {
+          console.log('上傳圖片失敗');
+        }
+      });
+    },
+    uploadUrl() {
+      this.tempRoomInfo.imageUrl = this.onlineUrl;
+    },
     showModal() {
+      this.onlineUrl = '';
       this.modal.show();
     },
 
