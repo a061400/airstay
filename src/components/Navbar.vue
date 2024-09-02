@@ -17,15 +17,15 @@
         <img alt="Vue logo" src="../assets/logo.png" style="width:25px">
         <router-link to="/main" class="navbar-brand">AirStay</router-link>
         <div class="navbar-nav">
-          <router-link to="/" class="nav-link">刊登空房</router-link>
-          <router-link to="/main" class="nav-link"
+          <router-link to="/homeowner" class="nav-link">刊登空房</router-link>
+          <router-link to="" class="nav-link"
           @click="onclickCurrencyBtn" style="color: yellow">
              {{curCurrency}}
           </router-link>
-          <router-link to="/main" class="nav-link" @click="onclickLangBtn">
+          <router-link to="" class="nav-link" @click="onclickLangBtn">
           <img alt="Vue logo" :src="require(`../assets/${curLang}.png`)" style="width:25px">
           </router-link>
-          <router-link to="/" class="nav-link">成為新會員</router-link>
+          <router-link to="/newmember" class="nav-link">成為新會員</router-link>
 
           <!-- 登入圖示 -->
           <i v-if="!isLogin" data-bs-toggle="dropdown" aria-expanded="false"

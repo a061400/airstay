@@ -12,6 +12,14 @@ const routes = [
         component: () => import('../views/UserLogin.vue'),
       },
       {
+        path: 'newmember',
+        component: () => import('../views/NewMember.vue'),
+      },
+      {
+        path: 'homeowner',
+        component: () => import('../views/Homeowner.vue'),
+      },
+      {
         path: 'main',
         component: () => import('../views/AllRoomView.vue'),
       },
@@ -30,6 +38,18 @@ const routes = [
       {
         path: 'ordered/:orderedId',
         component: () => import('../views/OrderedView.vue'),
+      },
+      {
+        path: '/about',
+        component: () => import('../views/AboutView.vue'),
+      },
+      {
+        path: '/policy',
+        component: () => import('../views/PolicyView.vue'),
+      },
+      {
+        path: '/terms',
+        component: () => import('../views/TermsView.vue'),
       },
     ],
   },
