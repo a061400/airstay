@@ -45,6 +45,7 @@
       </tbody>
     </table>
 </div>
+<Pagination :pages="pagination" @update-page="updatePage"></Pagination>
 <OrderModal ref="orderModal" :item="tempOrderInfo"
  @update-paid="updatePaid"></OrderModal>
 <DelModal ref="delModal" :item="tempOrderInfo"
@@ -55,6 +56,7 @@
 <script>
 import OrderModal from '@/components/OrderModal.vue';
 import DelModal from '@/components/DelModal.vue';
+import Pagination from '@/components/Pagination.vue';
 
 export default {
   data() {
@@ -65,11 +67,13 @@ export default {
       delComponent: {},
       tempOrderInfo: {},
       infoLength: 0,
+      pagination: {},
     };
   },
   components: {
     OrderModal,
     DelModal,
+    Pagination,
   },
 
   created() {
@@ -105,6 +109,7 @@ export default {
         .then((res) => {
           if (res.data.success) {
             this.orderInfo = res.data.orders;
+            this.pagination = res.data.pagination;
             console.log('[後台] 取得訂單列表成功', res.data);
           } else {
             console.log('[後台] 取得訂單列表失敗');
@@ -165,6 +170,10 @@ export default {
           this.$httpMessage(res, '修改訂單');
           this.isLoading = false;
         });
+    },
+
+    updatePage(curPage) {
+      this.getOrderInfo(curPage);
     },
   },
 };

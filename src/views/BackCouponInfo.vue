@@ -52,6 +52,7 @@
       </tbody>
     </table>
   </div>
+  <Pagination :pages="pagination" @update-page="updatePage"></Pagination>
   <CouponModal ref="couponModal"
     @update-coupon="updateCoupon" :coupon="tempCoupons">
   </CouponModal>
@@ -63,11 +64,13 @@
 <script>
 import CouponModal from '@/components/CouponModal.vue';
 import DelModal from '@/components/DelModal.vue';
+import Pagination from '@/components/Pagination.vue';
 
 export default {
   components: {
     CouponModal,
     DelModal,
+    Pagination,
   },
 
   inject: ['emitter'],
@@ -79,6 +82,7 @@ export default {
       couponComponent: {},
       delComponent: {},
       tempCoupons: {},
+      pagination: {},
     };
   },
   created() {
@@ -114,6 +118,7 @@ export default {
         .then((res) => {
           if (res.data.success) {
             this.coupons = res.data.coupons;
+            this.pagination = res.data.pagination;
             console.log('[後台] 取得優惠券列表成功', res.data);
           } else {
             console.log('[後台] 取得優惠券列表失敗');
@@ -181,6 +186,10 @@ export default {
           this.$httpMessage(response, '新增或編輯優惠券');
         },
       );
+    },
+
+    updatePage(curPage) {
+      this.getOrderInfo(curPage);
     },
   },
 };
