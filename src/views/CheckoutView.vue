@@ -137,7 +137,12 @@
             </tr>
             <tr>
               <th>總金額：</th>
-              <td>{{ $numFilter.currency(cart.total - cart.final_total) }}</td>
+              <td v-if="cart.final_total !== cart.total">
+                {{ $numFilter.currency(cart.total - cart.final_total) }}
+              </td>
+              <td v-else>
+                {{ $numFilter.currency(cart.total) }}
+              </td>
             </tr>
             <tr>
               <th>付款狀態：</th>
@@ -248,7 +253,7 @@
             <tfoot></tfoot>
           </table>
 
-          <Form class="col-md-6" v-slot="{ errors }" @submit="addCouponCode">
+          <Form v-if="!isPayView" class="col-md-6" v-slot="{ errors }" @submit="addCouponCode">
             <div class="input-group mb-3 input-group-sm">
               <Field
                 id="coupon"

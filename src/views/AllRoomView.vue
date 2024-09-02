@@ -18,10 +18,12 @@
         <HouseInfo  :info="item" :wishList="wishList"></HouseInfo>
     </div>
   </div>
+  <Pagination :pages="pagination" @update-page="updatePage"></Pagination>
 </template>
 
 <script>
 import HouseInfo from '@/components/HouseInfo.vue';
+import Pagination from '@/components/Pagination.vue';
 
 export default {
   inject: [
@@ -29,6 +31,7 @@ export default {
   ],
   components: {
     HouseInfo,
+    Pagination,
   },
   data() {
     return {
@@ -45,8 +48,7 @@ export default {
   },
   created() {
     this.emitter.emit('home-update-wishListNum');
-    this.getRoomData();
-    this.getWishList();
+    this.refreshView();
   },
   methods: {
     onClickSearch() {
@@ -81,6 +83,15 @@ export default {
           }
           this.isLoading = false;
         });
+    },
+
+    refreshView(page = 1) {
+      this.getRoomData(page);
+      this.getWishList();
+    },
+
+    updatePage(curPage) {
+      this.refreshView(curPage);
     },
   },
 };

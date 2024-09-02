@@ -4,11 +4,13 @@
  @onclick-currencyModal="showCurrencyModal"
  :wishListNum="wishListNum"></NavBar>
 <div class="container-fluid">
-    <div class="container-fluid mt-3 position-relative">
+  <div class="container-fluid position-relative">
     <ToastMessage></ToastMessage>
-    </div>
+  </div>
 </div>
- <router-view />
+<div style="min-height: 100vh;">
+   <router-view />
+</div>
 <LanguageModal ref="languageModal"
 @onclick-lang="changeLang">
 </LanguageModal>
