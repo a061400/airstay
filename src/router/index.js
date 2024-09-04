@@ -21,6 +21,7 @@ const routes = [
       },
       {
         path: 'main',
+        name: 'main',
         component: () => import('../views/AllRoomView.vue'),
       },
       {
@@ -75,6 +76,12 @@ const routes = [
         component: () => import('../views/BackOrderInfo.vue'),
       },
     ],
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: {
+      name: 'main',
+    },
   },
 ];
 
