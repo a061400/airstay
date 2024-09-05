@@ -58,21 +58,23 @@
         {{ info.title }}
       </h5>
       <p class="card-text">
-        <i class="bi bi-geo-alt-fill"></i>
+        <i class="bi bi-geo-alt-fill" style="color: green"></i>
         {{ info.category }}
       </p>
       <p class="card-text">
+        <i class="bi bi-house-fill"
+         style="color: Teal"></i>
         {{ info.content }}
       </p>
       <del class="card-text">
-        ${{ info.origin_price }} TWD
+        $ {{ info.origin_price }} TWD
       </del>
       <p class="card-text">
-         ${{ info.price }} TWD
+        $ {{ info.price }} TWD
       </p>
       <p class="card-text">
-        <i class="bi bi-star-fill"></i>
-        {{ info.unit }} {{ info.description }}則評論
+        <i class="bi bi-star-fill" style="color: DarkKhaki"></i>
+        {{ info.unit }} · {{ info.description }}則評論
       </p>
     </div>
   </div>

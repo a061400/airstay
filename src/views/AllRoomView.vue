@@ -4,21 +4,23 @@
   <Loading :active="isLoading">
     <img src="@/assets/loadingAni.gif" alt="Loading..." style="width:100px"/>
   </Loading>
-  <div class="rounded-pill" style="border: 1px solid cyan; margin: 30px auto;
-    width: 600px; height: 80px; display: flex; align-items: center;
+  <div class="border" style="border: 1px solid cyan; margin: 30px auto;
+    width: 1300px; height: 80px; display: flex; align-items: center;
   justify-content: center;">
       <div class="container-fluid" style="display: flex;
       justify-content: center; margin: 50px;">
-        <form class="d-flex" style="width:800px" @submit.prevent="onClickSearch">
+        <form class="d-flex" style="width:1200px" @submit.prevent="onClickSearch">
           <input class="form-control me-2 rounded-pill" type="search"
           placeholder="目的地(城市)" aria-label="Search" v-model="destination"
           >
           <input class="form-control me-2 rounded-pill" type="date"
           placeholder="入住日期" aria-label="Search">
+          <p class="mx-3 mt-3">To</p>
           <input class="form-control me-2 rounded-pill" type="date"
           placeholder="退房日期" aria-label="Search">
-          <button class="btn btn-outline-success rounded-circle" type="submit"
-          style="font-size: 20px; border: 3px solid cyan;"><i class="bi bi-search"></i>
+          <button class="btn btn-outline-danger rounded-circle" type="submit"
+          style="font-size: 20px; border: 1px solid white;">
+          <i class="bi bi-search" style="font-size: 25px"></i>
           </button>
         </form>
       </div>

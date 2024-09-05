@@ -21,6 +21,8 @@ import pushMessageState from '@/methods/pushMessageState';
 
 // 匯入繁體中文語系檔案
 import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json';
+// 匯入 GoogleMap 第三方庫
+import VueGoogleMaps from '@fawmi/vue-google-maps';
 import { currency, date } from './methods/numFilter';
 import router from './router';
 import App from './App.vue';
@@ -54,4 +56,9 @@ app.config.globalProperties.$httpMessage = pushMessageState;
 app.component('Loading', Loading);
 app.use(VueAxios, axios);
 app.use(router);
+app.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyAn7TlegMLO16peLDtRXQR2GAaFK9Nfv_s',
+  },
+});
 app.mount('#app');
