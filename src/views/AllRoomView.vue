@@ -15,7 +15,7 @@
           >
           <input class="form-control me-2 rounded-pill" type="date"
           placeholder="入住日期" aria-label="Search">
-          <p class="mx-3 mt-3">To</p>
+          <p class="me-2 mt-3">To</p>
           <input class="form-control me-2 rounded-pill" type="date"
           placeholder="退房日期" aria-label="Search">
           <button class="btn btn-outline-danger rounded-circle" type="submit"

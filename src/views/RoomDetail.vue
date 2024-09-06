@@ -40,28 +40,9 @@
           <i class="bi bi-house-fill me-1" style="color: Teal"></i>{{ roomInfo.content }}
         </div>
         <div class="fw-bold">
-          <i class="bi bi-star-fill" style="color: DarkKhaki"></i>
+          <i class="bi bi-star-fill" style="color: Orange"></i>
           {{ roomInfo.unit }} · {{ roomInfo.description }}則評價
         </div>
-        <hr />
-        <h5>設施與服務</h5>
-        <div
-          style="
-            display: grid; /* 網格 */
-            grid-template-columns: repeat(4, 1fr); /* 每行4列 */
-            grid-gap: 10px; /* 列的間距 */
-            margin: 0 auto; /* 容器置中 */
-          "
-        >
-          <p v-for="(service, key) in serviceList" :key="key">
-            <i class="bi bi-check-lg"></i> {{ service }}
-          </p>
-        </div>
-        <hr />
-        <h5>住宿地點</h5>
-        <LocationsMap :latData="22.66" :lngData="120.3"></LocationsMap>
-        <hr />
-        <h5>評論</h5>
       </article>
       <div class="col-4" style="margin-top: 80px">
         <div class="h5" v-if="!roomInfo.price">
@@ -189,16 +170,40 @@
         </div>
       </div>
     </div>
+        <hr />
+        <h5>設施與服務</h5>
+        <div
+          style="
+            display: grid; /* 網格 */
+            grid-template-columns: repeat(4, 1fr); /* 每行4列 */
+            grid-gap: 10px; /* 列的間距 */
+            margin: 0 auto; /* 容器置中 */
+          "
+        >
+          <p v-for="(service, key) in serviceList" :key="key">
+            <i class="bi bi-check-lg"></i> {{ service }}
+          </p>
+        </div>
+        <hr />
+        <h5>住宿地點</h5>
+        <LocationsMap :latData="22.66" :lngData="120.3"></LocationsMap>
+        <hr />
+        <h5>評論</h5>
+        <div v-for="a in 10" :key="a">
+            <Comment></Comment>
+        </div>
   </div>
 </template>
 
 <script>
 import LocationsMap from '@/components/LocationsMap.vue';
+import Comment from '@/components/Comment.vue';
 
 export default {
   inject: ['emitter'],
   components: {
     LocationsMap,
+    Comment,
   },
   data() {
     return {
