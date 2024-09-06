@@ -111,6 +111,10 @@ export default {
     refreshView(page = 1) {
       this.getRoomData(page);
       this.getWishList();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
     },
 
     updatePage(curPage) {
