@@ -15,7 +15,7 @@
       </div>
       <div
         class="col-8 d-flex flex-column justify-content-center rounded"
-        style="height: 200px; background-color: LightGrey"
+        style="height: 200px; background-color: WhiteSmoke"
       >
         <p>
             連續住了一星期，很滿意。 雖然是老飯店，但是設備有更新，維護的也挺好，

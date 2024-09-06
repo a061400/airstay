@@ -29,7 +29,8 @@
     <div class="row justify-content-center">
       <article class="col-8" style="margin-top: 30px">
         <h2 class="fw-bold">{{ roomInfo.title }}</h2>
-        <img :src="roomInfo.imageUrl" alt="" class="img-fluid mb-3" />
+        <!-- <img :src="roomInfo.imageUrl" alt="" class="img-fluid mb-3" /> -->
+        <Carousel :imageUrl="roomInfo.imageUrl"></Carousel>
         <div
           @click="onclickMap"
         >
@@ -198,12 +199,14 @@
 <script>
 import LocationsMap from '@/components/LocationsMap.vue';
 import Comment from '@/components/Comment.vue';
+import Carousel from '@/components/Carousel.vue';
 
 export default {
   inject: ['emitter'],
   components: {
     LocationsMap,
     Comment,
+    Carousel,
   },
   data() {
     return {
