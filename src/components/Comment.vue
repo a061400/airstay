@@ -7,7 +7,9 @@
             <i class="bi bi-star-fill me-2 mb-2" style="color: Orange; font-size:20px"></i>
             <h3 class="" style="color: Orange">{{ score }}</h3>
         </div>
-        <p>Shawn (來自台灣)</p>
+        <p><img alt="countrylogo" :src="require(`../assets/${countrylogo}.png`)"
+        class="mb-1" style="width:18px">
+          Shawn (來自台灣)</p>
         <p>豪華雙人房</p>
         <p>入住2晚 (2024年8月)</p>
       </div>
@@ -31,6 +33,7 @@ export default {
   data() {
     return {
       score: 10.0,
+      countrylogo: 'TW',
     };
   },
   created() {

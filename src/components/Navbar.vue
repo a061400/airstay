@@ -23,7 +23,7 @@
              {{curCurrency}}
           </router-link>
           <router-link to="" class="nav-link" @click="onclickLangBtn">
-          <img alt="Vue logo" :src="require(`../assets/${curLang}.png`)" style="width:25px">
+          <img alt="country logo" :src="require(`../assets/${curLang}.png`)" style="width:25px">
           </router-link>
           <router-link to="/newmember" class="nav-link">成為新會員</router-link>
 
