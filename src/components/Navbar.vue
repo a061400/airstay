@@ -41,7 +41,7 @@
           </router-link>
           <router-link to="/about" class="nav-link">關於我們</router-link>
 
-          <div class="position-absolute top-0 start-100">
+          <div class="position-absolute" style="top: 0px; right: 0px">
             <!-- 未登入圖示 -->
             <li class="nav-item dropdown">
               <a

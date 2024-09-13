@@ -1,23 +1,25 @@
 <template>
-<NavBar :isLogin="isLogin" :curCurrency="curCurrency"
-:curLang="curLang" @onclick-langModal="showLanguageModal"
- @onclick-currencyModal="showCurrencyModal"
- :wishListNum="wishListNum"></NavBar>
-<div class="container-fluid">
-  <div class="container-fluid position-relative">
-    <ToastMessage></ToastMessage>
+  <NavBar
+    :isLogin="isLogin"
+    :curCurrency="curCurrency"
+    :curLang="curLang"
+    @onclick-langModal="showLanguageModal"
+    @onclick-currencyModal="showCurrencyModal"
+    :wishListNum="wishListNum"
+  ></NavBar>
+  <div class="container-fluid">
+    <div class="container-fluid position-relative">
+      <ToastMessage></ToastMessage>
+    </div>
   </div>
-</div>
-<div style="min-height: 100vh;">
-   <router-view />
-</div>
-<LanguageModal ref="languageModal"
-@onclick-lang="changeLang">
-</LanguageModal>
-<CurrencyModal ref="currencyModal"
-@onclick-currency="changeCurrency">
-</CurrencyModal>
-<BottomBar></BottomBar>
+  <div style="min-height: 100vh">
+    <router-view />
+  </div>
+  <LanguageModal ref="languageModal" @onclick-lang="changeLang">
+  </LanguageModal>
+  <CurrencyModal ref="currencyModal" @onclick-currency="changeCurrency">
+  </CurrencyModal>
+  <BottomBar></BottomBar>
 </template>
 
 <script>
@@ -49,7 +51,10 @@ export default {
     };
   },
   created() {
-    const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
+    const token = document.cookie.replace(
+      /(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/,
+      '$1',
+    );
     console.log(token);
     this.$http.defaults.headers.common.Authorization = token;
     const api = `${process.env.VUE_APP_API}api/user/check`;
@@ -89,19 +94,17 @@ export default {
     },
     getWishListNum() {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
-      this.$http.get(api)
-        .then((res) => {
-          if (res.data.success) {
-            this.wishListNum = res.data.data.carts.length;
-            console.log('取得 心願總數量 成功', this.wishListNum);
-          } else {
-            console.log('取得 心願總數量 失敗');
-          }
-        });
+      this.$http.get(api).then((res) => {
+        if (res.data.success) {
+          this.wishListNum = res.data.data.carts.length;
+          console.log('取得 心願總數量 成功', this.wishListNum);
+        } else {
+          console.log('取得 心願總數量 失敗');
+        }
+      });
     },
   },
-  watch: {
-  },
+  watch: {},
   // 讓所有內層元件皆可以使用
   provide() {
     return {
