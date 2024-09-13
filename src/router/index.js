@@ -12,14 +12,6 @@ const routes = [
         component: () => import('../views/UserLogin.vue'),
       },
       {
-        path: 'newmember',
-        component: () => import('../views/NewMember.vue'),
-      },
-      {
-        path: 'homeowner',
-        component: () => import('../views/Homeowner.vue'),
-      },
-      {
         path: 'main',
         name: 'main',
         component: () => import('../views/AllRoomView.vue'),

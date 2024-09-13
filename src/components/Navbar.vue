@@ -23,7 +23,7 @@
         />
         <router-link to="/main" class="navbar-brand">AirStay</router-link>
         <div class="navbar-nav">
-          <router-link to="/homeowner" class="nav-link">刊登空房</router-link>
+          <router-link to="/dashboard/login" class="nav-link">刊登空房</router-link>
           <router-link
             to=""
             class="nav-link"
