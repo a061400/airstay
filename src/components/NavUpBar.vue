@@ -22,8 +22,7 @@
           style="width: 25px"
         />
         <router-link to="/main" class="navbar-brand">AirStay</router-link>
-        <div class="navbar-nav">
-          <router-link to="/dashboard/login" class="nav-link">刊登空房</router-link>
+        <div class="navbar-nav position-absolute" style="top:12px; right: 122px">
           <router-link
             to=""
             class="nav-link"
@@ -40,8 +39,9 @@
             />
           </router-link>
           <router-link to="/about" class="nav-link">關於我們</router-link>
+          </div>
 
-          <div class="position-absolute" style="top: 0px; right: 0px">
+          <div class="position-absolute end-0">
             <!-- 未登入圖示 -->
             <li class="nav-item dropdown">
               <a
@@ -78,7 +78,7 @@
             </li>
 
             <!-- 已登入圖示 -->
-            <li class="nav-item dropdown" style="top: -15px">
+            <li class="nav-item dropdown" style="top: -24px">
               <a
                 class="nav-link"
                 href="#"
@@ -98,7 +98,7 @@
               <ul
                 class="dropdown-menu dropdown-menu-dark"
                 aria-labelledby="navbarDarkDropdownMenuLink"
-                style="top: 53px; left: -160px"
+                style="top: 56px; left: -160px"
               >
                 <li>
                   <a
@@ -207,7 +207,7 @@
              @click.prevent="onclickCart"
              @keydown="handleKeyDown">
           </i> -->
-        </div>
+
       </div>
     </div>
   </nav>

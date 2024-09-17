@@ -1,17 +1,13 @@
 <template>
-  <NavBar
+  <NavUpBar
     :isLogin="isLogin"
     :curCurrency="curCurrency"
     :curLang="curLang"
     @onclick-langModal="showLanguageModal"
     @onclick-currencyModal="showCurrencyModal"
     :wishListNum="wishListNum"
-  ></NavBar>
-  <div class="container-fluid">
-    <div class="container-fluid position-relative">
+  ></NavUpBar>
       <ToastMessage></ToastMessage>
-    </div>
-  </div>
   <div style="min-height: 100vh">
     <router-view />
   </div>
@@ -23,7 +19,7 @@
 </template>
 
 <script>
-import NavBar from '@/components/NavBar.vue';
+import NavUpBar from '@/components/NavUpBar.vue';
 import BottomBar from '@/components/BottomBar.vue';
 import emitter from '@/methods/emitter';
 import ToastMessage from '@/components/ToastMessage.vue';
@@ -33,7 +29,7 @@ import CurrencyModal from '@/components/CurrencyModal.vue';
 export default {
   name: 'HomeView',
   components: {
-    NavBar,
+    NavUpBar,
     BottomBar,
     ToastMessage,
     LanguageModal,
@@ -78,6 +74,7 @@ export default {
     emitter.on('home-update-wishListNum', () => {
       this.getWishListNum();
     });
+    this.$router.push('/main');
   },
   methods: {
     showLanguageModal() {

@@ -110,6 +110,7 @@ export default {
         } else {
           console.log('用戶端 首頁 加入收藏失敗');
         }
+        this.$httpMessage(res, '加入收藏');
       });
     },
     deleteWish() {
@@ -119,11 +120,12 @@ export default {
           if (res.data.success) {
             this.emitter.emit('home-update-wishListNum');
             this.emitter.emit('AllRoomView-update');
-            console.log('用戶端 首頁 刪除心願成功', res);
+            console.log('用戶端 首頁 刪除收藏成功', res);
             this.isWish = false;
           } else {
-            console.log('用戶端 首頁 刪除心願失敗');
+            console.log('用戶端 首頁 刪除收藏失敗');
           }
+          this.$httpMessage(res, '刪除收藏');
         });
     },
     filterWishList() {

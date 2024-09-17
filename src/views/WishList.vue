@@ -3,19 +3,20 @@
   <Loading :active="isLoading">
     <img src="@/assets/loadingAni.gif" alt="Loading..." style="width:100px"/>
   </Loading>
-  <div class="container-fluid"
+  <div class="container-fluid mt-5"
        style="display: flex; justify-content: center;
-       align-items: center; margin: 50px;
+       align-items: center;
        flex-direction: column;">
             <h3 style="font-weight: bold;">心願單</h3>
             <i class="bi bi-heart-fill" style="color:red; fontSize:20px"></i>
             <h6>已收藏{{infoList.length}}間</h6>
   </div>
-
-  <div class="row px-5" id="content" >
-    <div class="col-12 col-sm-6 col-md-3 col-lg-2 px-3 mb-5"
-    v-for="(item,key) in infoList" :key="'content'+key">
-        <WishListInfo :info="item" @delet-wish="deleteWish"></WishListInfo>
+  <div class="px-5">
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-3 col-lg-2 px-3 mb-5"
+      v-for="(item,key) in infoList" :key="'content'+key">
+          <WishListInfo :info="item" @delet-wish="deleteWish"></WishListInfo>
+      </div>
     </div>
   </div>
 </template>
@@ -59,14 +60,15 @@ export default {
       this.$http.delete(api)
         .then((res) => {
           if (res.data.success) {
-            console.log('刪除心願資料成功', res);
+            console.log('刪除收藏成功', res);
             emitter.emit('home-update-wishListNum');
             emitter.emit('AllRoomView-update');
             this.getWishList();
           } else {
-            console.log('刪除心願資料失敗');
+            console.log('刪除收藏失敗');
             this.isLoading = false;
           }
+          this.$httpMessage(res, '刪除收藏');
         });
     },
   },

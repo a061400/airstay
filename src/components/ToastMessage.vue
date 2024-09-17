@@ -1,5 +1,6 @@
 <template>
-  <div class="toast-container position-absolute pe-3 top-0 end-0">
+  <!-- <div class="toast-container position-absolute pe-3 top-0 end-0"> -->
+    <div class="toast-container position-absolute top-50 start-50">
     <Toast v-for="(msg, key) in messages" :key="key"
       :msg="msg"
     />
@@ -19,8 +20,8 @@ export default {
   inject: ['emitter'],
   mounted() {
     this.emitter.on('push-message', (data) => {
-      const { style, title, content } = data;
-      this.messages.push({ style, title, content });
+      const { title, content } = data;
+      this.messages.push({ title, content });
     });
   },
 };

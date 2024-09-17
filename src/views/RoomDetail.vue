@@ -268,11 +268,16 @@ export default {
         } else {
           console.log('用戶端 獨立房間頁面 加入收藏失敗');
         }
+        this.$httpMessage(res, '加入收藏');
         this.status.loadingItem = '';
       });
     },
-    bookNow() {
-      // 有Bug，要先至少加入一次購物車，才能刪除，先留著。
+    bookNow(roomId) {
+      // 如果購物車是空的，要先至少加入一個到購物車，才能刪除。
+      if (!this.isWish) {
+        this.addToCart(roomId);
+      }
+
       // 先刪除全部購物車內的房間，再加入這一間房間進購物車。
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`;
       this.isLoading = true;
