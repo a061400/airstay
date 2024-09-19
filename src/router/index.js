@@ -44,6 +44,10 @@ const routes = [
         path: '/terms',
         component: () => import('../views/TermsView.vue'),
       },
+      {
+        path: '/roomdetailall',
+        component: () => import('../views/RoomDetailAll.vue'),
+      },
     ],
   },
   {

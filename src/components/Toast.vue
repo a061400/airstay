@@ -1,11 +1,7 @@
 <template>
-  <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" ref="toast">
-    <div class="toast-header">
+  <div class="toast rounded-pill" role="alert" aria-live="assertive" aria-atomic="true" ref="toast">
+    <div class="toast-body bg-info text-white rounded-pill text-center">
       <strong class="me-auto">{{ msg.title }}</strong>
-      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-    <div class="toast-body" v-if="msg.content">
-      {{ msg.content }}
     </div>
   </div>
 </template>
@@ -20,7 +16,7 @@ export default {
   mounted() {
     const toastEl = this.$refs.toast;
     const toast = new Toast(toastEl, {
-      delay: 6000,
+      delay: 2000,
     });
     toast.show();
   },

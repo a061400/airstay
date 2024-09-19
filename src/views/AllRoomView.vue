@@ -1,64 +1,21 @@
+<!-- eslint-disable vuejs-accessibility/iframe-has-title -->
 <!-- eslint-disable max-len -->
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <!-- eslint-disable vuejs-accessibility/form-control-has-label -->
 <template>
-  <Loading :active="isLoading">
-    <img src="@/assets/loadingAni.gif" alt="Loading..." style="width: 100px" />
-  </Loading>
   <section style="min-height: 100vh">
     <div class="d-flex">
       <div class="container row" style="margin-left: 200px; margin-top: 180px">
         <div class="col-lg-6 py-5 py-xl-5 py-xxl-7 text-center">
           <h1 class="display-4 text-1000 fw-bold">Let’s make a tour</h1>
           <h1 class="display-4 text-primary fw-bold">Discover the beauty</h1>
-          <div
-            class="container-fluid py-5 px-5"
-            style="display: flex; justify-content: center"
+          <button
+            class="btn btn-primary btn-lg mt-5"
+            type="button"
+            @click="onClickSearch"
           >
-            <!-- <div
-              class="border"
-              style="
-                border: 1px solid red;
-                margin: 30px auto;
-                width: 1000px;
-                height: 80px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-              "
-            > -->
-            <form class="d-flex" @submit.prevent="onClickSearch">
-              <input
-                class="form-control me-2 rounded-pill text-center"
-                type="search"
-                placeholder="目的地(城市)"
-                style="width: 300px"
-                aria-label="Search"
-                v-model="destination"
-              />
-              <input
-                class="form-control me-2 rounded-pill text-center"
-                type="date"
-                placeholder="入住日期"
-                aria-label="Search"
-              />
-              <p class="me-2 mt-3">To</p>
-              <input
-                class="form-control me-2 rounded-pill text-center"
-                type="date"
-                placeholder="退房日期"
-                aria-label="Search"
-              />
-              <button
-                class="btn btn-outline-danger rounded-circle"
-                type="submit"
-                style="font-size: 20px; border: 1px solid white"
-              >
-                <i class="bi bi-search" style="font-size: 25px"></i>
-              </button>
-            </form>
-            <!-- </div> -->
-          </div>
+            Book Now
+          </button>
         </div>
       </div>
       <div style="margin-left: -400px; margin-top: 50px">
@@ -70,30 +27,9 @@
       </div>
     </div>
   </section>
-  <section>
-    <div class="mx-5 px-5">
-      <div v-if="infoList.length === 0" class="text-center">
-        <h1>您搜尋的地點目前沒有提供房型</h1>
-      </div>
-      <div class="row">
-        <div
-          class="col-12 col-sm-6 col-md-3 col-lg-2 px-3 my-3"
-          v-for="(item, index, key) in infoList"
-          :key="'content' + key"
-        >
-          <HouseInfo :info="item" :wishList="wishList"></HouseInfo>
-        </div>
-      </div>
-      <Pagination
-        v-if="infoList.length !== 0"
-        :pages="pagination"
-        @update-page="updatePage"
-      ></Pagination>
-    </div>
-  </section>
 
   <section id="places" class="pt-5">
-    <div class="container my-5">
+    <div class="container">
       <div class="row flex-md-center">
         <div
           class="col-md-11 col-lg-4 py-md-3 px-4 px-md-3 px-lg-0 px-xl-2 order-lg-1"
@@ -112,7 +48,7 @@
             ultrices nec. Cras nulla mauris, fermentum nec libero in.
           </p>
           <button
-            class="btn btn-lg btn-primary hover-top"
+            class="btn btn-lg btn-warning hover-top"
             @click="onclickExplor"
           >
             Explore
@@ -315,10 +251,42 @@
         </div>
       </div>
     </div>
-    <!-- end of .container-->
   </section>
 
-  <section class="pt-5">
+  <section class="pt-5 my-5" id="featuresVideos">
+    <div class="container">
+      <div
+        class="row flex-center mb-5 justify-content-center align-items-center"
+      >
+        <div class="col-lg-8 text-center">
+          <h1 class="fw-bold fs-md-3 fs-lg-4 fs-xl-5">Featured videos</h1>
+          <hr
+            class="mx-auto text-primary my-4"
+            style="height: 3px; width: 100%"
+          />
+          <p class="mx-auto">
+            Aliquam sodales vitae ex tincidunt consectetur. Etiam eleifend
+            malesuada magna, at imperdiet justo euismod eu. Aliquam vel imperdet
+            mi, et convallis eros. Duis fermentum fringilla nisl at vulputate.
+            Nunc nec lorem faucibus, molestie nisi id, elementum sem. Sed
+            vulputate tempor augue a efficitur urna, ultrices eu. Duis vel
+            turpis et arcu.
+          </p>
+        </div>
+      </div>
+      <div class="text-center">
+              <iframe
+                src="https://www.youtube.com/embed/zLeLttVbFs8"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen=""
+                width="60%"
+                height="420px"
+              ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="pt-5 my-5">
     <div class="container">
       <div
         class="row flex-center mb-5 justify-content-center align-items-center"
@@ -535,91 +503,32 @@
 </template>
 
 <script>
-import HouseInfo from '@/components/HouseInfo.vue';
-import Pagination from '@/components/Pagination.vue';
-
 export default {
   inject: ['emitter'],
-  components: {
-    HouseInfo,
-    Pagination,
-  },
+
   data() {
     return {
-      isLoading: false,
       infoList: [],
-      wishList: [],
-      pagination: {},
-      destination: '',
       originInfoList: [],
     };
   },
-  mounted() {
-    this.emitter.on('AllRoomView-update', () => {
-      this.getWishList();
-    });
-  },
+  mounted() {},
   created() {
     this.emitter.emit('home-update-wishListNum');
     this.refreshView();
   },
   methods: {
     onClickSearch() {
-      // 刪除前後空白值
-      const keyword = this.destination.trim();
-
-      this.infoList = this.originInfoList;
-      this.infoList = this.infoList.filter((res) => res.category.includes(keyword));
-      window.scrollTo({
-        top: 970,
-        behavior: 'smooth',
-      });
-    },
-    getRoomData(page = 1) {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products?page=${page}`;
-      this.isLoading = true;
-      this.$http.get(api).then((res) => {
-        if (res.data.success) {
-          console.log('取得房間資料成功', res);
-          this.infoList = res.data.products;
-          this.originInfoList = res.data.products;
-          this.pagination = res.data.pagination;
-        } else {
-          console.log('取得房間資料失敗');
-        }
-
-        // 等待getWishList取得資料完成在讓loading消失
-        this.isLoading = false;
-      });
-    },
-    getWishList() {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
-      this.isLoading = true;
-      this.$http.get(api).then((res) => {
-        if (res.data.success) {
-          console.log('取得心願列表資料成功', res);
-          this.wishList = res.data.data.carts;
-        } else {
-          console.log('取得心願列表資料失敗');
-        }
-        this.isLoading = false;
-      });
+      this.$router.push('/roomdetailall');
     },
 
-    refreshView(page = 1, scroll = true) {
-      this.getRoomData(page);
-      this.getWishList();
-
+    refreshView(scroll = true) {
       if (scroll) {
         window.scrollTo({
           top: 0,
           behavior: 'smooth',
         });
       }
-    },
-
-    updatePage(curPage) {
-      this.refreshView(curPage, false);
     },
 
     onclickExplor() {
