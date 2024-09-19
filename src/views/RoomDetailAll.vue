@@ -4,7 +4,7 @@
   </Loading>
   <i
     class="bi bi-arrow-left-circle mx-5 my-5"
-    style="font-size: 35px; transition: transform 0.2s ease-in-out;"
+    style="font-size: 35px; transition: transform 0.2s ease-in-out"
     @click="onclickReturn"
     @keydown="handleKeyDown"
   >
@@ -26,34 +26,40 @@
               "
     > -->
     <form class="d-flex" @submit.prevent="onClickSearch">
-      <input
-        class="form-control me-2 rounded-pill text-center"
-        type="search"
-        placeholder="目的地(城市)"
-        style="width: 300px"
-        aria-label="Search"
-        v-model="destination"
-      />
-      <input
-        class="form-control me-2 rounded-pill text-center"
-        type="date"
-        placeholder="入住日期"
-        aria-label="Search"
-      />
-      <p class="me-2 mt-3">To</p>
-      <input
-        class="form-control me-2 rounded-pill text-center"
-        type="date"
-        placeholder="退房日期"
-        aria-label="Search"
-      />
-      <button
-        class="btn btn-outline-danger rounded-circle"
-        type="submit"
-        style="font-size: 20px; border: 1px solid white"
+      <div
+        style="display: flex; justify-content: center"
       >
-        <i class="bi bi-search" style="font-size: 25px"></i>
-      </button>
+        <input
+          class="form-control me-2 rounded-pill text-center"
+          type="search"
+          placeholder="目的地(城市)"
+          style="width: 100%"
+          aria-label="Search"
+          v-model="destination"
+        />
+        <input
+          class="form-control me-2 rounded-pill text-center"
+          type="date"
+          placeholder="入住日期"
+          style="width: 100%"
+          aria-label="Search"
+        />
+        <p class="me-2 mt-3">To</p>
+        <input
+          class="form-control me-2 rounded-pill text-center"
+          type="date"
+          placeholder="退房日期"
+          style="width: 100%"
+          aria-label="Search"
+        />
+        <button
+          class="btn btn-outline-danger rounded-circle"
+          type="submit"
+          style="font-size: 20px; border: 1px solid white"
+        >
+          <i class="bi bi-search" style="font-size: 25px"></i>
+        </button>
+      </div>
     </form>
   </div>
   <div v-show="!isLoading" class="mx-5 px-5">
