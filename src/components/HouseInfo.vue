@@ -129,10 +129,12 @@ export default {
         });
     },
     filterWishList() {
+      console.log('filterWishList', this.wishList);
       this.wishList.forEach((res) => {
         if (this.info.id === res.product.id) {
           this.wishId = res.id;
           this.isWish = true;
+          console.log(this.info.id);
         }
       });
     },

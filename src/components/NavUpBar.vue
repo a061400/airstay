@@ -23,7 +23,7 @@
         />
         <router-link to="/main" class="navbar-brand">AirStay</router-link>
         <router-link to="/roomdetailall" class="nav-link" style="color: lightgrey">搜好房</router-link>
-        <div class="navbar-nav position-absolute" style="top:12px; right: 122px">
+        <div class="navbar-nav position-absolute" style="right: 122px">
           <router-link
             to=""
             class="nav-link"
