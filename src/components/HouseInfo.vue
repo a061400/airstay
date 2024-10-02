@@ -88,6 +88,7 @@ export default {
   props: {
     info: {},
     wishList: {},
+    infoList: {},
   },
   data() {
     return {
@@ -129,12 +130,11 @@ export default {
         });
     },
     filterWishList() {
-      console.log('filterWishList', this.wishList);
+      this.isWish = false;
       this.wishList.forEach((res) => {
         if (this.info.id === res.product.id) {
           this.wishId = res.id;
           this.isWish = true;
-          console.log(this.info.id);
         }
       });
     },
@@ -163,6 +163,9 @@ export default {
   // 如果HouseInfo的組件創建完成後，wishList才拿到資料，就需要在watch觸發
   watch: {
     wishList() {
+      this.filterWishList();
+    },
+    infoList() {
       this.filterWishList();
     },
   },

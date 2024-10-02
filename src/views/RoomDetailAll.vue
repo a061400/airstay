@@ -72,7 +72,8 @@
         v-for="(item, index, key) in infoList"
         :key="'content' + key"
       >
-        <HouseInfo :info="item" :wishList="wishList" style="width:110%; height:100%;"></HouseInfo>
+        <HouseInfo :info="item" :wishList="wishList" :infoList="infoList"
+        style="width:110%; height:100%;"></HouseInfo>
       </div>
     </div>
     <Pagination
