@@ -5,8 +5,8 @@
 <template>
   <section style="min-height:100vh;">
     <div class="d-flex" style="margin-top: 50px">
-      <div class="container row" style="margin-top: 100px; margin-left: 150px">
-        <div class="col-sm-2 col-xs-3 col-md-6 col-lg-6 text-center">
+      <div class="container row" style="margin-top: 120px; margin-left: 0px">
+        <div class="col-sm-2 col-xs-3 col-md-6 col-lg-12 text-center">
           <h1 class="display-4 text-1000 fw-bold">Let’s make a tour</h1>
           <h1 class="display-4 text-primary fw-bold">Discover the beauty</h1>
           <button

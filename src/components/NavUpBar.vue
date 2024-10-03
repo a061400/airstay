@@ -23,7 +23,7 @@
         />
         <router-link to="/main" class="navbar-brand">AirStay</router-link>
         <router-link to="/roomdetailall" class="nav-link" style="color: lightgrey">搜好房</router-link>
-        <div class="navbar-nav position-absolute" style="right: 122px">
+        <div class="navbar-nav">
           <router-link
             to=""
             class="nav-link"
@@ -39,10 +39,10 @@
               style="width: 25px"
             />
           </router-link>
-          <router-link to="/about" class="nav-link">關於我們</router-link>
           </div>
 
-          <div class="position-absolute end-0">
+          <div class="navbar-nav">
+            <div class="position-absolute end-0" style="top: 0px;">
             <!-- 未登入圖示 -->
             <li class="nav-item dropdown">
               <a
@@ -79,7 +79,7 @@
             </li>
 
             <!-- 已登入圖示 -->
-            <li class="nav-item dropdown" style="top: -24px">
+            <li class="nav-item dropdown" style="top:-16px">
               <a
                 class="nav-link"
                 href="#"
@@ -122,6 +122,7 @@
                 </li>
               </ul>
             </li>
+            </div>
             <!-- 加入收藏圖示 -->
             <i
               class="bi bi-house-heart"
