@@ -13,54 +13,38 @@
     class="container-fluid py-5 px-5"
     style="display: flex; justify-content: center"
   >
-    <!-- <div
-              class="border"
-              style="
-                border: 1px solid red;
-                margin: 30px auto;
-                width: 1000px;
-                height: 80px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-              "
-    > -->
-    <form class="d-flex" @submit.prevent="onClickSearch">
-      <div
-        style="display: flex; justify-content: center"
-      >
-        <input
-          class="form-control me-2 rounded-pill text-center"
-          type="search"
-          placeholder="目的地(城市)"
-          style="width: 100%"
-          aria-label="Search"
-          v-model="destination"
-        />
-        <input
-          class="form-control me-2 rounded-pill text-center"
-          type="date"
-          placeholder="入住日期"
-          style="width: 100%"
-          aria-label="Search"
-        />
-        <p class="me-2 mt-3">To</p>
-        <input
-          class="form-control me-2 rounded-pill text-center"
-          type="date"
-          placeholder="退房日期"
-          style="width: 100%"
-          aria-label="Search"
-        />
-        <button
-          class="btn btn-outline-danger rounded-circle"
-          type="submit"
-          style="font-size: 20px; border: 1px solid white"
-        >
-          <i class="bi bi-search" style="font-size: 25px"></i>
-        </button>
-      </div>
-    </form>
+<form class="d-flex flex-column flex-lg-row col-10 col-lg-8" @submit.prevent="onClickSearch">
+  <div class="d-flex flex-column flex-lg-row w-100 justify-content-center">
+    <input
+      class="form-control me-lg-2 mb-2 mb-lg-0 rounded-pill text-center"
+      type="search"
+      placeholder="目的地(城市)"
+      aria-label="Search"
+      v-model="destination"
+    />
+    <input
+      class="form-control me-lg-2 mb-2 mb-lg-0 rounded-pill text-center"
+      type="date"
+      placeholder="入住日期"
+      aria-label="Search"
+    />
+    <p class="me-lg-2 mt-lg-3 mt-1 text-center">To</p>
+    <input
+      class="form-control me-lg-2 mb-2 mb-lg-0 rounded-pill text-center"
+      type="date"
+      placeholder="退房日期"
+      aria-label="Search"
+    />
+    <button
+      class="btn btn-outline-danger rounded-circle"
+      type="submit"
+      style="font-size: 20px; border: 1px solid white"
+    >
+      <i class="bi bi-search" style="font-size: 25px"></i>
+    </button>
+  </div>
+</form>
+
   </div>
   <div v-show="!isLoading" class="mx-5 px-5">
     <div v-if="infoList.length === 0" class="text-center">
@@ -72,7 +56,8 @@
         v-for="(item, index, key) in infoList"
         :key="'content' + key"
       >
-        <HouseInfo :info="item" :wishList="wishList"></HouseInfo>
+        <HouseInfo :info="item" :wishList="wishList" :infoList="infoList"
+        style="width:110%; height:100%;"></HouseInfo>
       </div>
     </div>
     <Pagination

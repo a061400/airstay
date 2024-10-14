@@ -224,7 +224,8 @@
         <div class="sticky-top">
           <article class="col-8">
             <h2>{{ cart.product.title }}</h2>
-            <img :src="cart.product.imageUrl" alt="" class="img-fluid mb-3" />
+            <img :src="cart.product.imageUrl" alt="" class="img-fluid mb-3"
+             style="width: 100%; height: 350px;"/>
             <div>{{ cart.product.category }}</div>
             <div>{{ cart.product.content }}</div>
             <div>

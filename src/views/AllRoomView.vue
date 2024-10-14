@@ -3,10 +3,10 @@
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <!-- eslint-disable vuejs-accessibility/form-control-has-label -->
 <template>
-  <section style="min-height: 100vh">
-    <div class="d-flex">
-      <div class="container row" style="margin-left: 200px; margin-top: 180px">
-        <div class="col-sm-2 col-xs-3 col-md-6 col-lg-6 py-5 text-center">
+  <section style="min-height:100vh;">
+    <div class="d-flex" style="margin-top: 50px">
+      <div class="container row" style="margin-top: 120px; margin-left: 0px">
+        <div class="col-sm-2 col-xs-3 col-md-6 col-lg-12 text-center">
           <h1 class="display-4 text-1000 fw-bold">Let’s make a tour</h1>
           <h1 class="display-4 text-primary fw-bold">Discover the beauty</h1>
           <button
@@ -18,7 +18,7 @@
           </button>
         </div>
       </div>
-      <div style="margin-left: -400px; margin-top: 50px;">
+      <div style="">
         <img
           src="@/assets/main-bg.png"
           alt="main-bg..."
