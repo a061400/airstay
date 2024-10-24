@@ -253,78 +253,74 @@ export default {
       });
     },
     addToCart(roomId) {
+      let wishListArr = localStorage.getItem('wishList');
+      wishListArr = JSON.parse(wishListArr);
+      if (!wishListArr) {
+        wishListArr = [];
+      }
+      wishListArr.push(roomId);
+      wishListArr = JSON.stringify(wishListArr);
+      localStorage.setItem('wishList', wishListArr);
+      this.emitter.emit('push-message', {
+        title: '加入收藏成功',
+      });
+
+      this.emitter.emit('home-update-wishListNum');
+      this.emitter.emit('AllRoomView-update');
+      this.isWish = true;
+    },
+    bookNow() {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
       const cart = {
-        product_id: roomId,
-        qty: 1,
+        product_id: this.roomInfo.id,
+        qty: Number(this.roomNum),
       };
-      this.status.loadingItem = roomId;
+      this.status.loadingItem = this.roomInfo.id;
       this.$http.post(api, { data: cart }).then((res) => {
         if (res.data.success) {
-          console.log('用戶端 獨立房間頁面 加入收藏成功', res.data.data);
-          this.emitter.emit('home-update-wishListNum');
-          this.emitter.emit('AllRoomView-update');
-          this.isWish = true;
+          console.log('用戶端 進入訂房步驟成功', res.data.data);
+          this.$router.push(`/checkout/${this.id}`);
         } else {
-          console.log('用戶端 獨立房間頁面 加入收藏失敗');
+          console.log('用戶端 進入訂房步驟失敗');
         }
-        this.$httpMessage(res, '加入收藏');
         this.status.loadingItem = '';
       });
-    },
-    bookNow(roomId) {
-      // 如果購物車是空的，要先至少加入一個到購物車，才能刪除。
-      if (!this.isWish) {
-        this.addToCart(roomId);
-      }
 
-      // 先刪除全部購物車內的房間，再加入這一間房間進購物車。
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`;
-      this.isLoading = true;
-      this.$http.delete(api).then((res) => {
-        if (res.data.success) {
-          console.log('獨立頁面 刪除全部購物車成功', res);
-          const api2 = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
-          const cart = {
-            product_id: this.roomInfo.id,
-            qty: Number(this.roomNum),
-          };
-          this.status.loadingItem = this.roomInfo.id;
-          this.$http.post(api2, { data: cart }).then((res2) => {
-            if (res2.data.success) {
-              console.log('用戶端 獨立房間頁面 加入收藏成功', res2.data.data);
-              this.emitter.emit('home-update-wishListNum');
-              this.emitter.emit('AllRoomView-update');
-              this.isWish = true;
-              this.$router.push(`/checkout/${this.id}`);
-            } else {
-              console.log('用戶端 獨立房間頁面 加入收藏失敗');
-            }
-            this.status.loadingItem = '';
-          });
-        } else {
-          console.log('獨立頁面 刪除全部購物車失敗');
-        }
-        this.isLoading = false;
-      });
+      // // 先刪除全部購物車內的房間，再加入這一間房間進購物車。
+      // const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`;
+      // this.isLoading = true;
+      // this.$http.delete(api).then((res) => {
+      //   if (res.data.success) {
+      //     console.log('獨立頁面 刪除全部購物車成功', res);
+      //     const api2 = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
+      //     const cart = {
+      //       product_id: this.roomInfo.id,
+      //       qty: Number(this.roomNum),
+      //     };
+      //     this.status.loadingItem = this.roomInfo.id;
+      //     this.$http.post(api2, { data: cart }).then((res2) => {
+      //       if (res2.data.success) {
+      //         console.log('用戶端 獨立房間頁面 加入收藏成功', res2.data.data);
+      //         this.emitter.emit('home-update-wishListNum');
+      //         this.emitter.emit('AllRoomView-update');
+      //         this.isWish = true;
+      //         this.$router.push(`/checkout/${this.id}`);
+      //       } else {
+      //         console.log('用戶端 獨立房間頁面 加入收藏失敗');
+      //       }
+      //       this.status.loadingItem = '';
+      //     });
+      //   } else {
+      //     console.log('獨立頁面 刪除全部購物車失敗');
+      //   }
+      //   this.isLoading = false;
+      // });
     },
     getWishList() {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
-      this.isLoading = true;
-      this.$http.get(api).then((res) => {
-        if (res.data.success) {
-          console.log('獨立頁面 取得心願列表資料成功', res);
-          this.wishList = res.data.data.carts;
-          this.filterWishList();
-        } else {
-          console.log('獨立頁面 取得心願列表資料失敗');
-        }
-        this.isLoading = false;
-      });
-    },
-    filterWishList() {
-      this.wishList.forEach((res) => {
-        if (this.id === res.product.id) {
+      const wishListString = localStorage.getItem('wishList');
+      const wishListArr = JSON.parse(wishListString);
+      wishListArr.forEach((res) => {
+        if (this.id === res) {
           this.isWish = true;
         }
       });

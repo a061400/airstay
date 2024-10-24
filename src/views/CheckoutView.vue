@@ -388,7 +388,7 @@ export default {
         if (res.data.success) {
           console.log('訂房頁面 取得資料成功', res);
           // eslint-disable-next-line prefer-destructuring
-          this.cart = res.data.data.carts[0];
+          this.cart = res.data.data.carts[res.data.data.carts.length - 1];
         } else {
           console.log('訂房頁面 取得資料失敗');
         }

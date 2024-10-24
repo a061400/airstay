@@ -4,9 +4,9 @@
       <img
         class="card-img-top img-cover"
         style="height: 155px"
-        :src="info.product.imageUrl"
+        :src="info.imageUrl"
         alt=""
-        @click="onClickRoom(info.product_id)"
+        @click="onClickRoom(info.id)"
         @keydown="handleKeyDown"
       />
       <i
@@ -36,26 +36,26 @@
         @blur="handleMouseLeave"
       ></i>
     </div>
-    <div class="card-body text-left" @click="onClickRoom(info.product_id)" @keydown="handleKeyDown">
+    <div class="card-body text-left" @click="onClickRoom(info.id)" @keydown="handleKeyDown">
       <h5 class="card-text">
-        {{ info.product.title }}
+        {{ info.title }}
       </h5>
       <p class="card-text">
         <i class="bi bi-geo-alt-fill"></i>
-        {{ info.product.category }}
+        {{ info.category }}
       </p>
       <p class="card-text">
-        {{ info.product.content }}
+        {{ info.content }}
       </p>
       <del class="card-text">
-        ${{ info.product.origin_price }} TWD
+        ${{ info.origin_price }} TWD
       </del>
       <p class="card-text">
-         ${{ info.product.price }} TWD
+         ${{ info.price }} TWD
       </p>
       <p class="card-text">
         <i class="bi bi-star-fill"></i>
-        {{ info.product.unit }} {{ info.product.description }}則評論
+        {{ info.unit }} {{ info.description }}則評論
       </p>
     </div>
   </div>

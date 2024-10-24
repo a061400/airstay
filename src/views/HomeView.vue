@@ -90,15 +90,9 @@ export default {
       this.curLang = curLangData;
     },
     getWishListNum() {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
-      this.$http.get(api).then((res) => {
-        if (res.data.success) {
-          this.wishListNum = res.data.data.carts.length;
-          console.log('取得 心願總數量 成功', this.wishListNum);
-        } else {
-          console.log('取得 心願總數量 失敗');
-        }
-      });
+      const wishListString = localStorage.getItem('wishList');
+      const wishListArr = JSON.parse(wishListString);
+      this.wishListNum = wishListArr.length;
     },
   },
   watch: {},

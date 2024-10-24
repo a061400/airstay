@@ -33,6 +33,7 @@ export default {
     return {
       isLoading: false,
       infoList: [],
+      allRoomInfo: [],
     };
   },
   created() {
@@ -40,36 +41,50 @@ export default {
   },
   methods: {
     getWishList() {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products/all`;
       this.isLoading = true;
-      this.$http.get(api)
-        .then((res) => {
-          if (res.data.success) {
-            this.infoList = res.data.data.carts;
-            console.log('取得心願列表資料成功', res);
-          } else {
-            console.log('取得心願列表資料失敗');
+      this.$http.get(api).then((res) => {
+        if (res.data.success) {
+          this.allRoomInfo = res.data.products;
+          console.log('wishList.Vue 取得所有房間列表成功');
+          this.createWishList();
+        } else {
+          console.log('wishList.Vue 取得所有房間列表失敗');
+        }
+        this.isLoading = false;
+      });
+    },
+    createWishList() {
+      const wishListString = localStorage.getItem('wishList');
+      const wishListArr = JSON.parse(wishListString);
+      const wishListData = [];
+
+      Object.keys(this.allRoomInfo).forEach((res) => {
+        for (let i = 0; i < wishListArr.length; i++) {
+          if (res === wishListArr[i]) {
+            wishListData.push(this.allRoomInfo[res]);
           }
-          this.isLoading = false;
-        });
+        }
+      });
+
+      this.infoList = wishListData;
+      console.log('wishListData', wishListData);
     },
     deleteWish(deleteId) {
-      console.log(deleteId);
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${deleteId}`;
-      this.isLoading = true;
-      this.$http.delete(api)
-        .then((res) => {
-          if (res.data.success) {
-            console.log('刪除收藏成功', res);
-            emitter.emit('home-update-wishListNum');
-            emitter.emit('AllRoomView-update');
-            this.getWishList();
-          } else {
-            console.log('刪除收藏失敗');
-            this.isLoading = false;
-          }
-          this.$httpMessage(res, '刪除收藏');
-        });
+      const wishListString = localStorage.getItem('wishList');
+      let wishListArr = JSON.parse(wishListString);
+      const deleteIndex = wishListArr.indexOf(deleteId);
+      if (deleteIndex !== -1) {
+        wishListArr.splice(deleteIndex, 1);
+      }
+      wishListArr = JSON.stringify(wishListArr);
+      localStorage.setItem('wishList', wishListArr);
+      emitter.emit('push-message', {
+        title: '刪除收藏成功',
+      });
+      emitter.emit('home-update-wishListNum');
+      emitter.emit('AllRoomView-update');
+      this.getWishList();
     },
   },
 };

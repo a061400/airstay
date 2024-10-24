@@ -98,42 +98,46 @@ export default {
   },
   methods: {
     addToWish(roomId) {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
-      const cart = {
-        product_id: roomId,
-        qty: 1,
-      };
-      this.$http.post(api, { data: cart }).then((res) => {
-        if (res.data.success) {
-          this.emitter.emit('home-update-wishListNum');
-          this.emitter.emit('AllRoomView-update');
-          console.log('用戶端 首頁 加入收藏成功', res.data.data);
-        } else {
-          console.log('用戶端 首頁 加入收藏失敗');
-        }
-        this.$httpMessage(res, '加入收藏');
+      // localStorage.removeItem('wishList');
+      let wishListArr = localStorage.getItem('wishList');
+      wishListArr = JSON.parse(wishListArr);
+      if (!wishListArr) {
+        wishListArr = [];
+      }
+      wishListArr.push(roomId);
+      wishListArr = JSON.stringify(wishListArr);
+      localStorage.setItem('wishList', wishListArr);
+      this.emitter.emit('push-message', {
+        title: '加入收藏成功',
       });
+
+      this.emitter.emit('home-update-wishListNum');
+      this.emitter.emit('AllRoomView-update');
+      this.isWish = true;
     },
     deleteWish() {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${this.wishId}`;
-      this.$http.delete(api)
-        .then((res) => {
-          if (res.data.success) {
-            this.emitter.emit('home-update-wishListNum');
-            this.emitter.emit('AllRoomView-update');
-            console.log('用戶端 首頁 刪除收藏成功', res);
-            this.isWish = false;
-          } else {
-            console.log('用戶端 首頁 刪除收藏失敗');
-          }
-          this.$httpMessage(res, '刪除收藏');
-        });
+      const wishListString = localStorage.getItem('wishList');
+      let wishListArr = JSON.parse(wishListString);
+      const index = wishListArr.indexOf(this.info.id);
+      if (index !== -1) {
+        wishListArr.splice(index, 1);
+      }
+      wishListArr = JSON.stringify(wishListArr);
+      localStorage.setItem('wishList', wishListArr);
+      this.emitter.emit('push-message', {
+        title: '刪除收藏成功',
+      });
+
+      this.emitter.emit('home-update-wishListNum');
+      this.emitter.emit('AllRoomView-update');
+      this.isWish = false;
     },
     filterWishList() {
       this.isWish = false;
-      this.wishList.forEach((res) => {
-        if (this.info.id === res.product.id) {
-          this.wishId = res.id;
+      const wishListString = localStorage.getItem('wishList');
+      const wishListArr = JSON.parse(wishListString);
+      wishListArr.forEach((res) => {
+        if (this.info.id === res) {
           this.isWish = true;
         }
       });
