@@ -3,18 +3,22 @@
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <!-- eslint-disable vuejs-accessibility/form-control-has-label -->
 <template>
-  <section style="min-height:100vh;">
+  <section style="min-height: 100vh">
     <div class="d-flex" style="margin-top: 50px">
       <div class="container row" style="margin-top: 120px; margin-left: 0px">
         <div class="col-sm-2 col-xs-3 col-md-6 col-lg-12 text-center">
-          <h1 class="display-4 text-1000 fw-bold">Let’s make a tour</h1>
-          <h1 class="display-4 text-primary fw-bold">Discover the beauty</h1>
+          <h1 class="display-4 text-1000 fw-bold">
+            {{ languageText01[curLang] }}
+          </h1>
+          <h1 class="display-4 text-primary fw-bold">
+            {{ languageText02[curLang] }}
+          </h1>
           <button
             class="btn btn-primary btn-lg mt-5"
             type="button"
             @click="onClickSearch"
           >
-            Book Now
+            {{ languageText03[curLang] }}
           </button>
         </div>
       </div>
@@ -35,23 +39,20 @@
           class="col-md-11 col-lg-4 py-md-3 px-4 px-md-3 px-lg-0 px-xl-2 order-lg-1"
         >
           <h1 class="fw-bold fs-md-3 fs-xl-5">
-            Amazing places to enjoy your travel
+            {{ languageText04[curLang] }}
           </h1>
           <hr
             class="text-primary my-4 my-lg-3 my-xl-4"
             style="height: 3px; width: 100%"
           />
           <p class="lh-lg">
-            Etiam facilisis, sapien quis porta dignissim, orci nisi pharetra
-            dui, varius vehicula ligula nulla sit amet lorem. Aenean in
-            vestibulum quam. Cras commodo varius neque, non gravida diam
-            ultrices nec. Cras nulla mauris, fermentum nec libero in.
+            {{ languageText05[curLang] }}
           </p>
           <button
             class="btn btn-lg btn-warning hover-top"
             @click="onclickExplor"
           >
-            Explore
+            {{ languageText06[curLang] }}
           </button>
         </div>
         <div class="col-lg-8 order-lg-0 order-1 px-4 px-md-3 py-8 py-md-3">
@@ -259,29 +260,26 @@
         class="row flex-center mb-5 justify-content-center align-items-center"
       >
         <div class="col-lg-8 text-center">
-          <h1 class="fw-bold fs-md-3 fs-lg-4 fs-xl-5">Featured videos</h1>
+          <h1 class="fw-bold fs-md-3 fs-lg-4 fs-xl-5">
+            {{ languageText07[curLang] }}
+          </h1>
           <hr
             class="mx-auto text-primary my-4"
             style="height: 3px; width: 100%"
           />
           <p class="mx-auto">
-            Aliquam sodales vitae ex tincidunt consectetur. Etiam eleifend
-            malesuada magna, at imperdiet justo euismod eu. Aliquam vel imperdet
-            mi, et convallis eros. Duis fermentum fringilla nisl at vulputate.
-            Nunc nec lorem faucibus, molestie nisi id, elementum sem. Sed
-            vulputate tempor augue a efficitur urna, ultrices eu. Duis vel
-            turpis et arcu.
+            {{ languageText08[curLang] }}
           </p>
         </div>
       </div>
       <div class="text-center">
-              <iframe
-                src="https://www.youtube.com/embed/zLeLttVbFs8"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen=""
-                width="60%"
-                height="420px"
-              ></iframe>
+        <iframe
+          src="https://www.youtube.com/embed/zLeLttVbFs8"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen=""
+          width="60%"
+          height="420px"
+        ></iframe>
       </div>
     </div>
   </section>
@@ -292,7 +290,9 @@
         class="row flex-center mb-5 justify-content-center align-items-center"
       >
         <div class="col-lg-8 text-center">
-          <h1 class="fw-bold fs-md-3 fs-lg-4 fs-xl-5">Member's Experiences</h1>
+          <h1 class="fw-bold fs-md-3 fs-lg-4 fs-xl-5">
+            {{ languageText09[curLang] }}
+          </h1>
           <hr
             class="mx-auto text-primary my-4"
             style="height: 3px; width: 100%"
@@ -312,11 +312,16 @@
                   <div class="card h-100">
                     <div class="card-body d-flex flex-center flex-column">
                       <p class="text-center card-text mb-5">
-                        “Curabitur posuere ullamcorper pulvinar. Donec dignissim
-                        bibendum leo, at faucibus enim aliquam eu. Nullam quis
-                        pulvinar diam, ac elementum urna. Integer id vehicula
-                        tortor, nec pulvinar libero. Ut elit elit, fringilla a
-                        nisi ut, dapibus eleifend quam.”
+                        This booking website provides an excellent user
+                        experience with a clean, intuitive interface and a
+                        variety of filters that make it easy to find the perfect
+                        room. The property listings are detailed, with real
+                        photos, amenity descriptions, and guest reviews that
+                        help build confidence before booking. Overall, the
+                        booking flow is smooth, and customer support is
+                        responsive and professional, providing quick solutions
+                        to any issues, which makes the entire experience feel
+                        reliable and well-cared-for.
                       </p>
                       <div
                         class="d-flex justify-content-center align-items-center"
@@ -346,11 +351,16 @@
                   <div class="card h-100">
                     <div class="card-body d-flex flex-center flex-column">
                       <p class="text-center card-text mb-5">
-                        “Curabitur posuere ullamcorper pulvinar. Donec dignissim
-                        bibendum leo, at faucibus enim aliquam eu. Nullam quis
-                        pulvinar diam, ac elementum urna. Integer id vehicula
-                        tortor, nec pulvinar libero. Ut elit elit, fringilla a
-                        nisi ut, dapibus eleifend quam.”
+                        This booking website provides an excellent user
+                        experience with a clean, intuitive interface and a
+                        variety of filters that make it easy to find the perfect
+                        room. The property listings are detailed, with real
+                        photos, amenity descriptions, and guest reviews that
+                        help build confidence before booking. Overall, the
+                        booking flow is smooth, and customer support is
+                        responsive and professional, providing quick solutions
+                        to any issues, which makes the entire experience feel
+                        reliable and well-cared-for.
                       </p>
                       <div
                         class="d-flex justify-content-center align-items-center"
@@ -380,11 +390,16 @@
                   <div class="card h-100">
                     <div class="card-body d-flex flex-center flex-column">
                       <p class="text-center card-text mb-5">
-                        “Curabitur posuere ullamcorper pulvinar. Donec dignissim
-                        bibendum leo, at faucibus enim aliquam eu. Nullam quis
-                        pulvinar diam, ac elementum urna. Integer id vehicula
-                        tortor, nec pulvinar libero. Ut elit elit, fringilla a
-                        nisi ut, dapibus eleifend quam.”
+                        This booking website provides an excellent user
+                        experience with a clean, intuitive interface and a
+                        variety of filters that make it easy to find the perfect
+                        room. The property listings are detailed, with real
+                        photos, amenity descriptions, and guest reviews that
+                        help build confidence before booking. Overall, the
+                        booking flow is smooth, and customer support is
+                        responsive and professional, providing quick solutions
+                        to any issues, which makes the entire experience feel
+                        reliable and well-cared-for.
                       </p>
                       <div
                         class="d-flex justify-content-center align-items-center"
@@ -414,11 +429,16 @@
                   <div class="card h-100">
                     <div class="card-body d-flex flex-center flex-column">
                       <p class="text-center card-text mb-5">
-                        “Curabitur posuere ullamcorper pulvinar. Donec dignissim
-                        bibendum leo, at faucibus enim aliquam eu. Nullam quis
-                        pulvinar diam, ac elementum urna. Integer id vehicula
-                        tortor, nec pulvinar libero. Ut elit elit, fringilla a
-                        nisi ut, dapibus eleifend quam.”
+                        This booking website provides an excellent user
+                        experience with a clean, intuitive interface and a
+                        variety of filters that make it easy to find the perfect
+                        room. The property listings are detailed, with real
+                        photos, amenity descriptions, and guest reviews that
+                        help build confidence before booking. Overall, the
+                        booking flow is smooth, and customer support is
+                        responsive and professional, providing quick solutions
+                        to any issues, which makes the entire experience feel
+                        reliable and well-cared-for.
                       </p>
                       <div
                         class="d-flex justify-content-center align-items-center"
@@ -492,9 +512,9 @@
       >
         <div class="row">
           <div class="col-12 text-center">
-            <h2 class="">EXCLUSIVE DEAL</h2>
-            <h1 class="fw-bold">Enjoy 30% Off On All Hotel</h1>
-            <h1 class="fw-bold">優惠折扣碼:airstay30</h1>
+            <h1 class="">{{ languageText10[curLang] }}</h1>
+            <h2 class="">{{ languageText11[curLang] }}</h2>
+            <h2 class="fw-bold">{{ languageText12[curLang] }}</h2>
           </div>
         </div>
       </div>
@@ -504,12 +524,120 @@
 
 <script>
 export default {
-  inject: ['emitter'],
+  inject: ['emitter', 'curLang'],
 
   data() {
     return {
       infoList: [],
       originInfoList: [],
+      languageText01: {
+        TW: '展開一段旅程',
+        EN: 'Let’s make a tour',
+        FR: 'Let’s make a tour',
+        JP: 'Let’s make a tour',
+        KR: 'Let’s make a tour',
+        TH: 'Let’s make a tour',
+        VN: 'Let’s make a tour',
+      },
+      languageText02: {
+        TW: '探索這個美麗的世界',
+        EN: 'Discover the beauty',
+        FR: 'Discover the beauty',
+        JP: 'Discover the beauty',
+        KR: 'Discover the beauty',
+        TH: 'Discover the beauty',
+        VN: 'Discover the beauty',
+      },
+      languageText03: {
+        TW: '馬上訂房',
+        EN: 'Book Now',
+        FR: 'Book Now',
+        JP: 'Book Now',
+        KR: 'Book Now',
+        TH: 'Book Now',
+        VN: 'Book Now',
+      },
+      languageText04: {
+        TW: '享受旅行的好去處',
+        EN: 'Amazing places to enjoy your travel',
+        FR: 'Amazing places to enjoy your travel',
+        JP: 'Amazing places to enjoy your travel',
+        KR: 'Amazing places to enjoy your travel',
+        TH: 'Amazing places to enjoy your travel',
+        VN: 'Amazing places to enjoy your travel',
+      },
+      languageText05: {
+        TW: '我們的地球有如此多令人驚嘆的美景，從古老的森林和歷史遺跡到令人驚嘆的湖泊、河流和海洋。',
+        EN: 'Our planet is adorned with so much breathtaking beauty, from ancient forests and historical ruins to stunning lakes, rivers, and seas.',
+        FR: 'Our planet is adorned with so much breathtaking beauty, from ancient forests and historical ruins to stunning lakes, rivers, and seas.',
+        JP: 'Our planet is adorned with so much breathtaking beauty, from ancient forests and historical ruins to stunning lakes, rivers, and seas.',
+        KR: 'Our planet is adorned with so much breathtaking beauty, from ancient forests and historical ruins to stunning lakes, rivers, and seas.',
+        TH: 'Our planet is adorned with so much breathtaking beauty, from ancient forests and historical ruins to stunning lakes, rivers, and seas.',
+        VN: 'Our planet is adorned with so much breathtaking beauty, from ancient forests and historical ruins to stunning lakes, rivers, and seas.',
+      },
+      languageText06: {
+        TW: '去探索',
+        EN: 'Explore',
+        FR: 'Explore',
+        JP: 'Explore',
+        KR: 'Explore',
+        TH: 'Explore',
+        VN: 'Explore',
+      },
+      languageText07: {
+        TW: '旅程介紹',
+        EN: 'Featured videos',
+        FR: 'Featured videos',
+        JP: 'Featured videos',
+        KR: 'Featured videos',
+        TH: 'Featured videos',
+        VN: 'Featured videos',
+      },
+      languageText08: {
+        TW: '無論您是渴望探索厄瓜多爾偏遠的惡魔鍋瀑布的冒險家，還是更喜歡在意大利科莫湖的寧靜美景中放鬆，這些目的地都將為您帶來難忘的體驗。',
+        EN: 'Whether you’re an adventurer eager to explore the remote Pailón del Diablo in Ecuador or you prefer relaxing amid the serene beauty of Lake Como,Italy, these destinations promise unforgettable experiences.',
+        FR: 'Whether you’re an adventurer eager to explore the remote Pailón del Diablo in Ecuador or you prefer relaxing amid the serene beauty of Lake Como,Italy, these destinations promise unforgettable experiences.',
+        JP: 'Whether you’re an adventurer eager to explore the remote Pailón del Diablo in Ecuador or you prefer relaxing amid the serene beauty of Lake Como,Italy, these destinations promise unforgettable experiences.',
+        KR: 'Whether you’re an adventurer eager to explore the remote Pailón del Diablo in Ecuador or you prefer relaxing amid the serene beauty of Lake Como,Italy, these destinations promise unforgettable experiences.',
+        TH: 'Whether you’re an adventurer eager to explore the remote Pailón del Diablo in Ecuador or you prefer relaxing amid the serene beauty of Lake Como,Italy, these destinations promise unforgettable experiences.',
+        VN: 'Whether you’re an adventurer eager to explore the remote Pailón del Diablo in Ecuador or you prefer relaxing amid the serene beauty of Lake Como,Italy, these destinations promise unforgettable experiences.',
+      },
+      languageText09: {
+        TW: '會員評論',
+        EN: 'Member’s Experiences',
+        FR: 'Member’s Experiences',
+        JP: 'Member’s Experiences',
+        KR: 'Member’s Experiences',
+        TH: 'Member’s Experiences',
+        VN: 'Member’s Experiences',
+      },
+      languageText10: {
+        TW: '獨家優惠',
+        EN: 'EXCLUSIVE DEAL',
+        FR: 'EXCLUSIVE DEAL',
+        JP: 'EXCLUSIVE DEAL',
+        KR: 'EXCLUSIVE DEAL',
+        TH: 'EXCLUSIVE DEAL',
+        VN: 'EXCLUSIVE DEAL',
+      },
+      languageText11: {
+        TW: '訂房享有 30% 折扣',
+        EN: 'Enjoy 30% Off On All Hotel',
+        FR: 'Enjoy 30% Off On All Hotel',
+        JP: 'Enjoy 30% Off On All Hotel',
+        KR: 'Enjoy 30% Off On All Hotel',
+        TH: 'Enjoy 30% Off On All Hotel',
+        VN: 'Enjoy 30% Off On All Hotel',
+      },
+      languageText12: {
+        TW: '折扣碼：airstay30',
+        EN: 'Discount Code : airstay30',
+        FR: 'Discount Code : airstay30',
+        JP: 'Discount Code : airstay30',
+        KR: 'Discount Code : airstay30',
+        TH: 'Discount Code : airstay30',
+        VN: 'Discount Code : airstay30',
+      },
     };
   },
   mounted() {},

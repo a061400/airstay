@@ -102,6 +102,7 @@ export default {
     return {
       emitter,
       curCurrency: computed(() => this.curCurrency), // 使用 computed 包裝 curCurrency
+      curLang: computed(() => this.curLang), // 使用 computed 包裝 curLang
     };
   },
 
