@@ -50,10 +50,10 @@
           {{ roomInfo.origin_price }} 元
         </div>
         <del class="h6" v-if="roomInfo.price"
-          >原價 ${{ roomInfo.origin_price }} TWD
+          >原價 ${{ roomInfo.origin_price }} {{ curCurrency }}
         </del>
         <div class="h5" v-if="roomInfo.price">
-          <strong> 特價 ${{ roomInfo.price }} TWD </strong>
+          <strong> 特價 ${{ roomInfo.price }} {{ curCurrency }} </strong>
         </div>
         <hr />
         <Form
@@ -202,7 +202,10 @@ import Comment from '@/components/Comment.vue';
 import Carousel from '@/components/Carousel.vue';
 
 export default {
-  inject: ['emitter'],
+  inject: [
+    'emitter',
+    'curCurrency',
+  ],
   components: {
     LocationsMap,
     Comment,

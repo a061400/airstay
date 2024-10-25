@@ -138,10 +138,10 @@
             <tr>
               <th>總金額：</th>
               <td v-if="cart.final_total !== cart.total">
-                {{ $numFilter.currency(cart.total - cart.final_total) }}
+                $ {{ $numFilter.currency(cart.total - cart.final_total) }} {{ curCurrency }}
               </td>
               <td v-else>
-                {{ $numFilter.currency(cart.total) }}
+                $ {{ $numFilter.currency(cart.total) }} {{ curCurrency }}
               </td>
             </tr>
             <tr>
@@ -292,7 +292,7 @@
           <table class="table align-middle">
             <div class="text-success" v-if="cart.coupon">已套用優惠券</div>
             <div class="" style="font-weight: bold; font-size: 18px">
-              總金額：{{ $numFilter.currency(cart.total) }}
+              總金額：$ {{ $numFilter.currency(cart.total) }} {{ curCurrency }}
             </div>
             <div
               v-if="cart.final_total !== cart.total"
@@ -305,9 +305,9 @@
               v-if="cart.final_total !== cart.total"
               style="font-weight: bold; font-size: 18px"
             >
-              折扣後總金額：{{
+              折扣後總金額：$ {{
                 $numFilter.currency(cart.total - cart.final_total)
-              }}
+              }} {{ curCurrency }}
             </div>
           </table>
         </div>
@@ -319,6 +319,9 @@
 
 <script>
 export default {
+  inject: [
+    'curCurrency',
+  ],
   data() {
     return {
       isLoading: false,

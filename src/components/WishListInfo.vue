@@ -48,10 +48,10 @@
         {{ info.content }}
       </p>
       <del class="card-text">
-        ${{ info.origin_price }} TWD
+        ${{ info.origin_price }} {{ curCurrency }}
       </del>
       <p class="card-text">
-         ${{ info.price }} TWD
+         ${{ info.price }} {{ curCurrency }}
       </p>
       <p class="card-text">
         <i class="bi bi-star-fill"></i>
@@ -64,6 +64,9 @@
 <script>
 export default {
   props: ['info'],
+  inject: [
+    'curCurrency',
+  ],
   data() {
     return {
       isWish: true,

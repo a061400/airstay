@@ -67,10 +67,10 @@
         {{ info.content }}
       </p>
       <del class="card-text">
-        $ {{ info.origin_price }} TWD
+        $ {{ info.origin_price }} {{ this.curCurrency }}
       </del>
       <p class="card-text">
-        $ {{ info.price }} TWD
+        $ {{ info.price }} {{ this.curCurrency }}
       </p>
       <p class="card-text">
         <i class="bi bi-star-fill" style="color: DarkKhaki"></i>
@@ -84,6 +84,7 @@
 export default {
   inject: [
     'emitter',
+    'curCurrency',
   ],
   props: {
     info: {},

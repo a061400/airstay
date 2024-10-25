@@ -25,6 +25,7 @@ import emitter from '@/methods/emitter';
 import ToastMessage from '@/components/ToastMessage.vue';
 import LanguageModal from '@/components/LanguageModal.vue';
 import CurrencyModal from '@/components/CurrencyModal.vue';
+import { computed } from 'vue';
 
 export default {
   name: 'HomeView',
@@ -100,7 +101,9 @@ export default {
   provide() {
     return {
       emitter,
+      curCurrency: computed(() => this.curCurrency), // 使用 computed 包裝 curCurrency
     };
   },
+
 };
 </script>
