@@ -27,6 +27,7 @@
       type="date"
       placeholder="入住日期"
       aria-label="Search"
+      v-model="checkInDate"
     />
     <p class="me-lg-2 mt-lg-3 mt-1 text-center">To</p>
     <input
@@ -34,6 +35,7 @@
       type="date"
       placeholder="退房日期"
       aria-label="Search"
+      v-model="checkOutDate"
     />
     <button
       class="btn btn-outline-danger rounded-circle"
@@ -81,6 +83,8 @@ export default {
       infoList: [],
       wishList: [],
       destination: '',
+      checkInDate: '',
+      checkOutDate: '',
       pagination: {},
       originInfoList: [],
     };
@@ -101,11 +105,21 @@ export default {
 
   methods: {
     onClickSearch() {
-      // 刪除前後空白值
-      const keyword = this.destination.trim();
+      if (!this.destination || !this.checkInDate || !this.checkOutDate) {
+        this.emitter.emit('push-message', {
+          title: '請填寫所有欄位',
+        });
+      } else {
+        this.emitter.emit('push-message', {
+          title: '搜尋成功',
+        });
+        // 執行搜尋操作
+        // 刪除前後空白值
+        const keyword = this.destination.trim();
 
-      this.infoList = this.originInfoList;
-      this.infoList = this.infoList.filter((res) => res.category.includes(keyword));
+        this.infoList = this.originInfoList;
+        this.infoList = this.infoList.filter((res) => res.category.includes(keyword));
+      }
     },
 
     updatePage(curPage) {
