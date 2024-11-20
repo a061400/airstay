@@ -41,12 +41,12 @@ export default {
   },
   methods: {
     getWishList() {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products/all`;
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`;
       this.isLoading = true;
       this.$http.get(api).then((res) => {
         if (res.data.success) {
           this.allRoomInfo = res.data.products;
-          console.log('wishList.Vue 取得所有房間列表成功');
+          console.log('wishList.Vue 取得所有房間列表成功', this.allRoomInfo[0].id);
           this.createWishList();
         } else {
           console.log('wishList.Vue 取得所有房間列表失敗');
@@ -59,16 +59,25 @@ export default {
       const wishListArr = JSON.parse(wishListString);
       const wishListData = [];
 
-      Object.keys(this.allRoomInfo).forEach((res) => {
+      // Object.keys(this.allRoomInfo).forEach((res) => {
+      //   for (let i = 0; i < wishListArr.length; i++) {
+      //     console.log(wishListArr);
+      //     if (res.id === wishListArr[i]) {
+      //       wishListData.push(this.allRoomInfo[res]);
+      //     }
+      //   }
+      // });
+
+      this.allRoomInfo.forEach((res) => {
         for (let i = 0; i < wishListArr.length; i++) {
-          if (res === wishListArr[i]) {
-            wishListData.push(this.allRoomInfo[res]);
+          if (res.id === wishListArr[i]) {
+            wishListData.push(res);
           }
         }
       });
 
       this.infoList = wishListData;
-      console.log('wishListData', wishListData);
+      console.log('wishListData', this.infoList);
     },
     deleteWish(deleteId) {
       const wishListString = localStorage.getItem('wishList');
