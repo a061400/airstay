@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkairstay"]=self["webpackChunkairstay"]||[]).push([[576],{576:function(n,a,r){r.r(a),r.d(a,{default:function(){return f}});var s=r(6768);const t={class:"about"},u=(0,s.Lk)("h1",null,"This is an Policy page",-1),e=[u];function c(n,a){return(0,s.uX)(),(0,s.CE)("div",t,e)}var i=r(1241);const l={},o=(0,i.A)(l,[["render",c]]);var f=o}}]);
+//# sourceMappingURL=576.20df066d.js.map

@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkairstay"]=self["webpackChunkairstay"]||[]).push([[75],{2075:function(n,a,r){r.r(a),r.d(a,{default:function(){return o}});var s=r(6768);const t={class:"about"},u=(0,s.Lk)("h1",null,"This is an Terms page",-1),e=[u];function c(n,a){return(0,s.uX)(),(0,s.CE)("div",t,e)}var i=r(1241);const f={},l=(0,i.A)(f,[["render",c]]);var o=l}}]);
+//# sourceMappingURL=75.b6707934.js.map
