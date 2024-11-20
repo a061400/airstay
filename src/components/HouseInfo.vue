@@ -137,11 +137,14 @@ export default {
       this.isWish = false;
       const wishListString = localStorage.getItem('wishList');
       const wishListArr = JSON.parse(wishListString);
-      wishListArr.forEach((res) => {
-        if (this.info.id === res) {
-          this.isWish = true;
-        }
-      });
+
+      if (wishListArr) {
+        wishListArr.forEach((res) => {
+          if (this.info.id === res) {
+            this.isWish = true;
+          }
+        });
+      }
     },
     handleKeyDown(event) {
       if (event.key === 'Enter' || event.key === ' ') {

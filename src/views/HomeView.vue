@@ -93,7 +93,12 @@ export default {
     getWishListNum() {
       const wishListString = localStorage.getItem('wishList');
       const wishListArr = JSON.parse(wishListString);
-      this.wishListNum = wishListArr.length;
+
+      if (!wishListArr) {
+        this.wishListNum = 0;
+      } else {
+        this.wishListNum = wishListArr.length;
+      }
     },
   },
   watch: {},

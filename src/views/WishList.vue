@@ -68,16 +68,18 @@ export default {
       //   }
       // });
 
-      this.allRoomInfo.forEach((res) => {
-        for (let i = 0; i < wishListArr.length; i++) {
-          if (res.id === wishListArr[i]) {
-            wishListData.push(res);
+      if (wishListArr) {
+        this.allRoomInfo.forEach((res) => {
+          for (let i = 0; i < wishListArr.length; i++) {
+            if (res.id === wishListArr[i]) {
+              wishListData.push(res);
+            }
           }
-        }
-      });
+        });
 
-      this.infoList = wishListData;
-      console.log('wishListData', this.infoList);
+        this.infoList = wishListData;
+        console.log('wishListData', this.infoList);
+      }
     },
     deleteWish(deleteId) {
       const wishListString = localStorage.getItem('wishList');
